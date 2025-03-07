@@ -2821,11 +2821,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\thien\\Downloads\\retail-chain-management-backend\\retail-chain-management-backend\\RCM.Backend\\RCM.Backend\\RCM.Backend.csproj",
+      "projectUniqueName": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\RCM.Backend.csproj",
       "projectName": "RCM.Backend",
-      "projectPath": "C:\\Users\\thien\\Downloads\\retail-chain-management-backend\\retail-chain-management-backend\\RCM.Backend\\RCM.Backend\\RCM.Backend.csproj",
+      "projectPath": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\RCM.Backend.csproj",
       "packagesPath": "C:\\Users\\thien\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\thien\\Downloads\\retail-chain-management-backend\\retail-chain-management-backend\\RCM.Backend\\RCM.Backend\\obj\\",
+      "outputPath": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\thien\\AppData\\Roaming\\NuGet\\NuGet.Config",
