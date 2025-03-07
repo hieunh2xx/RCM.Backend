@@ -1,0 +1,61 @@
+.tool-bar {
+    background-color: darkturquoise;
+    height: 100px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-bar {
+    padding-left: 10px;
+}
+
+.invoice-bar {
+    padding-right: 10px;
+}
+
+.invoice-wrapper {
+    position: relative;
+    padding-right: 10px;
+}
+
+.invoice-button {
+    position: relative;
+    padding-right: 25px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 140px;
+}
+
+.invoice-close-btn {
+    font-size: 18px;
+    color: #dc3545;
+    background-color: white;
+    border-radius: 50%;
+    padding: 2px;
+    cursor: pointer;
+    border: 1px solid #dc3545;
+}
+
+.invoice-close-btn:hover {
+    color: white;
+    background-color: #dc3545;
+}
+
+.item-card {
+    border: 0.01px black solid;
+    border-radius: 5px;
+    padding: 10px 20px 20px 10px;
+    height: 600px;
+    overflow: auto;
+    margin-bottom: 30px;
+}
+
+.page-body {
+    overflow-y: auto;
+    height: auto;
+}
