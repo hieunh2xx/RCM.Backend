@@ -135,74 +135,53 @@ namespace RCM.Backend.Controllers
             return Ok(attendanceRecords);
         }
 
-        [HttpGet("AttendanceReport/Range")]
-        public async Task<IActionResult> GetAttendanceReportByRange([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+        [HttpGet("AttendanceReport")]
+        public async Task<IActionResult> GetAttendanceReport([FromQuery] DateTime date)
         {
-            if (startDate > endDate)
-                return BadRequest("startDate must be earlier than endDate.");
-
-            // Lấy danh sách tất cả nhân viên
             var allEmployees = await _context.Employees.ToListAsync();
-
-            // Lấy dữ liệu điểm danh trong khoảng thời gian được truyền vào
-            var attendanceRecords = await _context.AttendanceHis
-                .Where(a => a.AttendanceDate >= startDate && a.AttendanceDate <= endDate)
+            var attendedEmployees = await _context.AttendanceHis
+                .Where(a => a.AttendanceDate == date)
                 .Include(a => a.Employee) // Load thông tin nhân viên
                 .ToListAsync();
 
-            // Tạo dictionary để nhóm dữ liệu theo ngày
-            var dateRangeReport = new Dictionary<DateTime, object>();
-
-            for (DateTime currentDate = startDate.Date; currentDate <= endDate.Date; currentDate = currentDate.AddDays(1))
-            {
-                // Lọc danh sách nhân viên đã điểm danh trong ngày hiện tại
-                var attendedEmployees = attendanceRecords
-                    .Where(a => a.AttendanceDate.Date == currentDate)
-                    .Select(a => new
-                    {
-                        a.Employee.Id,
-                        a.Employee.FullName,
-                        a.AttendanceDate,
-                        a.Employee.Image,
-                        a.Employee.BirthDate,
-                        a.Shift,
-                        a.CheckInTime,
-                        a.CheckOutTime,
-                        Status = "Attended"
-                    })
-                    .ToList();
-
-                // Lấy danh sách ID nhân viên đã điểm danh
-                var attendedEmployeeIds = attendedEmployees.Select(a => a.Id).ToHashSet();
-
-                // Lọc danh sách nhân viên chưa điểm danh trong ngày
-                var notAttendedEmployees = allEmployees
-                    .Where(e => !attendedEmployeeIds.Contains(e.Id))
-                    .Select(e => new
-                    {
-                        e.Id,
-                        e.FullName,
-                        e.BirthDate,
-                        e.Image,
-                        Shift = "N/A",
-                        CheckInTime = (DateTime?)null,
-                        CheckOutTime = (DateTime?)null,
-                        Status = "Not Attended"
-                    })
-                    .ToList();
-
-                // Thêm vào báo cáo
-                dateRangeReport[currentDate] = new
+            var attendedEmployeeDetails = attendedEmployees
+                .Select(a => new
                 {
-                    Date = currentDate,
-                    AttendedEmployees = attendedEmployees,
-                    NotAttendedEmployees = notAttendedEmployees
-                };
-            }
+                    a.Employee.Id,
+                    a.Employee.FullName,
+                    a.AttendanceDate,
+                    a.Employee.Image,
+                    a.Employee.BirthDate,
+                    a.Shift,
+                    a.CheckInTime,
+                    a.CheckOutTime,
+                    Status = "Attended"
+                })
+                .ToList();
 
-            return Ok(dateRangeReport);
+            var attendedEmployeeIds = attendedEmployees.Select(a => a.EmployeeId).ToHashSet();
+            var notAttendedEmployeeDetails = allEmployees
+                .Where(e => !attendedEmployeeIds.Contains(e.Id))
+                .Select(e => new
+                {
+                    e.Id,
+                    e.FullName,
+                    e.BirthDate,
+                    e.Image,
+                    Shift = "N/A",
+                    CheckInTime = (DateTime?)null,
+                    CheckOutTime = (DateTime?)null,
+                    Status = "Not Attended"
+                })
+                .ToList();
+
+            return Ok(new
+            {
+                Date = date.Date,
+                AttendedEmployees = attendedEmployeeDetails,
+                NotAttendedEmployees = notAttendedEmployeeDetails
+            });
         }
-
 
         [HttpGet("GetEmployees")]
         public async Task<IActionResult> GetEmployees()
