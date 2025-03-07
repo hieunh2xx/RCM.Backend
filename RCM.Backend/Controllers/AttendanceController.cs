@@ -18,7 +18,6 @@ namespace RCM.Backend.Controllers
             _context = context;
         }
 
-        // 🚀 Check-in API
         [HttpPost("CheckIn")]
         public async Task<IActionResult> CheckIn([FromBody] CheckInRequest request)
         {
@@ -66,7 +65,6 @@ namespace RCM.Backend.Controllers
             });
         }
 
-        // 🚀 Check-out API
         [HttpPost("CheckOut")]
         public async Task<IActionResult> CheckOut([FromBody] CheckOutRequest request)
         {
@@ -108,7 +106,6 @@ namespace RCM.Backend.Controllers
             });
         }
 
-        // 🚀 API lấy chi tiết chấm công của nhân viên
         [HttpGet("AttendanceDetail")]
         public async Task<IActionResult> GetAttendance([FromQuery] int employeeId)
         {
@@ -138,7 +135,6 @@ namespace RCM.Backend.Controllers
             return Ok(attendanceRecords);
         }
 
-        // 🚀 API lấy báo cáo chấm công
         [HttpGet("AttendanceReport")]
         public async Task<IActionResult> GetAttendanceReport([FromQuery] DateTime date)
         {
@@ -187,7 +183,6 @@ namespace RCM.Backend.Controllers
             });
         }
 
-        // 🆕 API Quản lý danh sách nhân viên
         [HttpGet("GetEmployees")]
         public async Task<IActionResult> GetEmployees()
         {
@@ -219,7 +214,6 @@ namespace RCM.Backend.Controllers
             return Ok("Employee added successfully.");
         }
 
-        // 🛠 Các lớp request
         public class CheckInRequest
         {
             public int EmployeeId { get; set; }
