@@ -9,9 +9,9 @@ using RCM.Backend.Models;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<RetailChainContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-// Đăng ký các service cho Dependency Injection
-//builder.Services.AddScoped<IJwtService, JwtService>();
-//builder.Services.AddScoped<IUserService, UserService>();
+// đăng ký các service cho dependency injection
+//builder.Services.addscoped<ijwtservice, jwtservice>();
+//builder.services.addscoped<iuserservice, userservice>();
 
 // Add services to the container.
 builder.Services.AddCors(options =>
