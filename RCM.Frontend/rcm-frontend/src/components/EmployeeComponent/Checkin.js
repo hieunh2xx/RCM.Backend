@@ -184,7 +184,7 @@ const Calendar = () => {
                     {hasCheckedIn ? hasCheckedOut || "Chưa Check-out" : "-"}
                   </p>
 
-                  {isToday && !hasCheckedIn && (
+                  {isToday && !hasCheckedIn && currentHour < 17 && (
                     <button
                       className="mt-4 p-2 bg-blue-500 text-white rounded mr-16"
                       onClick={handleCheckIn}
@@ -192,7 +192,7 @@ const Calendar = () => {
                       Check-in
                     </button>
                   )}
-                  {hasCheckedIn && !hasCheckedOut && currentHour > 17 && (
+                  {hasCheckedIn && !hasCheckedOut && currentHour >= 17 && (
                     <button
                       className="mt-4 p-2 bg-red-500 text-white rounded mr-16"
                       onClick={handleCheckOut}

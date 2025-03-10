@@ -189,7 +189,7 @@ const Header = () => {
                       Danh sách nhân viên
                     </Link>
                     <Link
-                      to="/button11"
+                      to="/salary"
                       className="block px-4 py-2 hover:bg-gray-200"
                     >
                       Lương

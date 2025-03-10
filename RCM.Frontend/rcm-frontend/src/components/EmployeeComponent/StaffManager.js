@@ -17,9 +17,12 @@ export default function StaffManager() {
     },
   });
   useEffect(() => {
-    fetchWarehouses();
-    fetchStaff();
-  }, []);
+    const delayDebounceFn = setTimeout(() => {
+      fetchStaff(searchTerm);
+    }, 300); // Chờ 300ms để tránh gọi API quá nhiều lần
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm]);
   const fetchWarehouses = async () => {
     try {
       const response = await axios.get(
@@ -177,7 +180,6 @@ export default function StaffManager() {
               style={{ width: "30rem" }}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             />
             <button
               className="btn btn-primary d-flex align-items-center px-4"

@@ -11,6 +11,7 @@ import SalesChartPage from "./sale-dashboadConponent/SalesChartPage";
 import StaffManager from "./components/EmployeeComponent/StaffManager";
 import { ToastContainer } from "react-toastify";
 import RegisterStaff from "./components/EmployeeComponent/RegisterStaff";
+import SalaryHistory from "./components/EmployeeComponent/SalaryHistory";
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
   return token ? children : <Navigate to="/login" />;
@@ -70,6 +71,15 @@ function App() {
             element={
               <ProtectedRoute>
                 <StaffManager />
+                <ToastContainer position="top-right" autoClose={3000} />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/salary"
+            element={
+              <ProtectedRoute>
+                <SalaryHistory />
                 <ToastContainer position="top-right" autoClose={3000} />
               </ProtectedRoute>
             }
