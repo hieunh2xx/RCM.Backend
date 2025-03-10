@@ -9,6 +9,8 @@ import Main from "./components/pos/main";
 import Header from "./headerComponent/header";
 import SalesChartPage from "./sale-dashboadConponent/SalesChartPage";
 import StaffManager from "./components/EmployeeComponent/StaffManager";
+import { ToastContainer } from "react-toastify";
+import RegisterStaff from "./components/EmployeeComponent/RegisterStaff";
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
   return token ? children : <Navigate to="/login" />;
@@ -25,6 +27,7 @@ function App() {
 
           {/* Trang Login */}
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterStaff />} />
           <Route path="/attendance" element={<Attendance />} />
           {/* Các trang cần đăng nhập */}
           <Route
@@ -63,10 +66,11 @@ function App() {
           />
 
           <Route
-            path="/stafftmanage"
+            path="/staffmanage"
             element={
               <ProtectedRoute>
                 <StaffManager />
+                <ToastContainer position="top-right" autoClose={3000} />
               </ProtectedRoute>
             }
           />

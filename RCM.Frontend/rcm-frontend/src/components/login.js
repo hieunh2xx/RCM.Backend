@@ -101,6 +101,12 @@ const LoginPage = () => {
         >
           ĐĂNG NHẬP
         </button>
+        <button
+          onClick={() => navigate("/register")}
+          className="w-full bg-green-600 text-white p-3 rounded-md font-semibold hover:bg-blue-700 mt-3"
+        >
+          ĐĂNG KÝ NHÂN VIÊN
+        </button>
       </div>
     </div>
   );
