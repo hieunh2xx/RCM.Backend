@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "uPzDhsvBpbpksVM0axVk3Woipj2MhAFVCitmgsCIjkQ=",
+  "Hash": "WiZF8Tnk59r0wCGc+FyJ8bAhvogyesPFG4zOKzy+obw=",
   "Source": "RCM.Backend",
   "BasePath": "_content/RCM.Backend",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }
