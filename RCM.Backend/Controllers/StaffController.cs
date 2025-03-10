@@ -92,6 +92,41 @@ namespace RCM.Backend.Controllers
             return Ok(employeeData);
         }
 
+        [HttpPut("update-employee/{id}")]
+        public IActionResult UpdateEmployee(int id, [FromBody] EmployeeDTO request)
+        {
+            var employee = _context.Employees.FirstOrDefault(e => e.Id == id);
+            if (employee == null)
+            {
+                return NotFound(new { message = "Employee not found!" });
+            }
+
+            bool exists = _context.Employees.Any(e =>
+                (e.IdentityNumber == request.IdentityNumber || e.PhoneNumber == request.PhoneNumber)
+                && e.Id != id);
+            if (exists)
+            {
+                return BadRequest(new { message = "Identity number or phone number already exists!" });
+            }
+
+            // Cập nhật thông tin nhân viên
+            employee.Image = request.Image ?? employee.Image;
+            employee.FullName = request.FullName ?? employee.FullName;
+            employee.Gender = request.Gender ?? employee.Gender;
+            employee.BirthDate = request.BirthDate;
+            employee.IdentityNumber = request.IdentityNumber ?? employee.IdentityNumber;
+            employee.Hometown = request.Hometown ?? employee.Hometown;
+            employee.CurrentAddress = request.CurrentAddress ?? employee.CurrentAddress;
+            employee.PhoneNumber = request.PhoneNumber ?? employee.PhoneNumber;
+            employee.WorkShiftId = request.WorkShiftId ?? employee.WorkShiftId;
+            employee.FixedSalary = request.FixedSalary ?? employee.FixedSalary;
+            employee.ActiveStatus = request.ActiveStatus ?? employee.ActiveStatus;
+            employee.BranchId = request.BranchId ?? employee.BranchId;
+
+            _context.SaveChanges();
+
+            return Ok(new { message = "Employee updated successfully!" });
+        }
 
         [HttpPost("add-account")]
         public IActionResult AddAccountForStaff([FromBody] AccountDTO request)
