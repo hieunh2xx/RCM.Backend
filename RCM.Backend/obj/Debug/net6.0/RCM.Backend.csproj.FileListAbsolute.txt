@@ -427,3 +427,7 @@ D:\HN23_CPL_FE_05\React\RCM.Backend\RCM.Backend\obj\Debug\net6.0\refint\RCM.Back
 D:\HN23_CPL_FE_05\React\RCM.Backend\RCM.Backend\obj\Debug\net6.0\RCM.Backend.pdb
 D:\HN23_CPL_FE_05\React\RCM.Backend\RCM.Backend\obj\Debug\net6.0\RCM.Backend.genruntimeconfig.cache
 D:\HN23_CPL_FE_05\React\RCM.Backend\RCM.Backend\obj\Debug\net6.0\ref\RCM.Backend.dll
+D:\BE_RCM\RCM.Backend\RCM.Backend\bin\Debug\net6.0\CsvHelper.dll
+D:\BE_RCM\RCM.Backend\RCM.Backend\bin\Debug\net6.0\EPPlus.dll
+D:\BE_RCM\RCM.Backend\RCM.Backend\bin\Debug\net6.0\Microsoft.IO.RecyclableMemoryStream.dll
+D:\BE_RCM\RCM.Backend\RCM.Backend\bin\Debug\net6.0\System.Xml.XPath.XmlDocument.dll

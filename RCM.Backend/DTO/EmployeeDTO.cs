@@ -21,7 +21,20 @@ public class EmployeeDTO
     public string? Hometown { get; set; }
     public string? CurrentAddress { get; set; }
     public int? FixedSalary { get; set; }
-
+    public class StaffExportDTO
+    {
+        public int Id { get; set; }
+        public string? FullName { get; set; }
+        public string? Gender { get; set; }
+        public DateTime BirthDate { get; set; }
+        public string? PhoneNumber { get; set; }
+        public int? WorkShiftId { get; set; }
+        public bool? ActiveStatus { get; set; }
+        public DateTime StartDate { get; set; }
+        public int? BranchId { get; set; }
+        public string? Username { get; set; }
+        public string? Role { get; set; }
+    }
     public static EmployeeDTO MapToDTO(Employee employee)
     {
         return new EmployeeDTO
