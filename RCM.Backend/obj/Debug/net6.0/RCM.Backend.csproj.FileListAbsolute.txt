@@ -431,3 +431,11 @@ D:\BE_RCM\RCM.Backend\RCM.Backend\bin\Debug\net6.0\CsvHelper.dll
 D:\BE_RCM\RCM.Backend\RCM.Backend\bin\Debug\net6.0\EPPlus.dll
 D:\BE_RCM\RCM.Backend\RCM.Backend\bin\Debug\net6.0\Microsoft.IO.RecyclableMemoryStream.dll
 D:\BE_RCM\RCM.Backend\RCM.Backend\bin\Debug\net6.0\System.Xml.XPath.XmlDocument.dll
+D:\BE_RCM\RCM.Backend\RCM.Backend\bin\Debug\net6.0\ClosedXML.dll
+D:\BE_RCM\RCM.Backend\RCM.Backend\bin\Debug\net6.0\ClosedXML.Parser.dll
+D:\BE_RCM\RCM.Backend\RCM.Backend\bin\Debug\net6.0\DocumentFormat.OpenXml.dll
+D:\BE_RCM\RCM.Backend\RCM.Backend\bin\Debug\net6.0\DocumentFormat.OpenXml.Framework.dll
+D:\BE_RCM\RCM.Backend\RCM.Backend\bin\Debug\net6.0\ExcelNumberFormat.dll
+D:\BE_RCM\RCM.Backend\RCM.Backend\bin\Debug\net6.0\RBush.dll
+D:\BE_RCM\RCM.Backend\RCM.Backend\bin\Debug\net6.0\SixLabors.Fonts.dll
+D:\BE_RCM\RCM.Backend\RCM.Backend\bin\Debug\net6.0\System.IO.Packaging.dll
