@@ -10,6 +10,7 @@ import {
   format,
   parseISO,
 } from "date-fns";
+import { vi } from "date-fns/locale";
 
 const fetchAttendanceData = async (startDate, endDate, setAttendanceData) => {
   try {
@@ -63,21 +64,28 @@ const getWeeksInMonth = (year, month) => {
 };
 
 const EmployeeTable = () => {
-  const currentYear = new Date().getFullYear();
-  const currentMonth = new Date().getMonth() + 1;
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth() + 1;
+  const currentWeekStart = startOfWeek(currentDate, { weekStartsOn: 1 });
   const [employees, setEmployees] = useState([]);
   const [selectedYear, setSelectedYear] = useState(currentYear);
   const [selectedMonth, setSelectedMonth] = useState(currentMonth);
   const [weeks, setWeeks] = useState(
     getWeeksInMonth(currentYear, currentMonth)
   );
-  const [selectedWeek, setSelectedWeek] = useState(weeks[0]);
+  const [selectedWeek, setSelectedWeek] = useState(
+    format(currentWeekStart, "yyyy-MM-dd")
+  );
   const [weekDates, setWeekDates] = useState([]);
 
   useEffect(() => {
     const newWeeks = getWeeksInMonth(selectedYear, selectedMonth);
     setWeeks(newWeeks);
-    setSelectedWeek(newWeeks[0]);
+    setSelectedWeek(
+      newWeeks.find((week) => week >= format(currentWeekStart, "yyyy-MM-dd")) ||
+        newWeeks[0]
+    );
   }, [selectedYear, selectedMonth]);
 
   useEffect(() => {
@@ -147,7 +155,7 @@ const EmployeeTable = () => {
               </th>
               {weekDates.map((date, index) => (
                 <th key={index} className="border p-2 bg-gray-100 text-center">
-                  {format(parseISO(date), "dd/MM")}
+                  {format(parseISO(date), "EEEE (dd/MM)", { locale: vi })}
                 </th>
               ))}
             </tr>
