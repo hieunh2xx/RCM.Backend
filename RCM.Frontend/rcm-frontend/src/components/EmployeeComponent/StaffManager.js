@@ -8,6 +8,7 @@ export default function StaffManager() {
   const [staffList, setStaffList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [warehouses, setWarehouses] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [selectedStaff, setSelectedStaff] = useState(null); // Nhân viên đang sửa
   const { register, handleSubmit, reset, setValue } = useForm({
     defaultValues: {
@@ -29,15 +30,19 @@ export default function StaffManager() {
       console.error("Lỗi khi lấy danh sách kho hàng:", error);
     }
   };
-  const fetchStaff = async () => {
+  const fetchStaff = async (search = "") => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/Staff/getStaff"
+        `http://localhost:5000/api/Staff/getStaff?name=${search}`
       );
       setStaffList(response.data);
     } catch (error) {
       console.error("Lỗi khi lấy danh sách nhân viên:", error);
     }
+  };
+
+  const handleSearch = () => {
+    fetchStaff(searchTerm);
   };
   const openUpdateModal = async (id) => {
     try {
@@ -168,10 +173,16 @@ export default function StaffManager() {
             <input
               type="text"
               className="form-control"
-              placeholder="Theo mã nhân viên, tên nhân viên"
+              placeholder="Theo tên nhân viên"
               style={{ width: "30rem" }}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             />
-            <button className="btn btn-primary d-flex align-items-center px-4">
+            <button
+              className="btn btn-primary d-flex align-items-center px-4"
+              onClick={handleSearch}
+            >
               Tìm kiếm
             </button>
           </div>
