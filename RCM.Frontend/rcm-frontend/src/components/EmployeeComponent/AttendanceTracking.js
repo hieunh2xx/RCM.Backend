@@ -106,7 +106,7 @@ const EmployeeTable = () => {
   return (
     <div className="h-screen flex flex-col">
       <div className="flex justify-between items-center p-4 border-b bg-white shadow">
-        <div className="text-lg font-bold">Employee Weekly Attendance</div>
+        <div className="text-lg font-bold">Lịch Làm Việc Hàng Tuần</div>
         <div className="flex gap-2">
           <select
             value={selectedYear}

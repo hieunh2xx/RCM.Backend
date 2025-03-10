@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { format, parseISO } from "date-fns";
+import { vi } from "date-fns/locale";
 
 const employeeId = 2;
 
@@ -122,7 +123,10 @@ const Calendar = () => {
         >
           ◀
         </button>
-        <h2 className="text-xl font-bold">{format(firstDay, "MMMM yyyy")}</h2>
+        <h2 className="text-xl font-bold uppercase">
+          {" "}
+          {format(firstDay, "MMMM yyyy", { locale: vi })}
+        </h2>
         <button
           className="p-2 bg-gray-300 rounded"
           onClick={() => changeMonth(1)}

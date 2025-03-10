@@ -57,7 +57,7 @@ const SalaryHistory = () => {
       <div className="p-10">
         <div className="p-4 border-b bg-white shadow">
           <div className="flex justify-between items-center my-3">
-            <div className="text-lg font-bold">Employee Salary History</div>
+            <div className="text-lg font-bold">Lịch Sử Lương Nhân Viên</div>
             <div className="flex gap-4 items-center">
               <select
                 value={selectedYear}
