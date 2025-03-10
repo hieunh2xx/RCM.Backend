@@ -19,4 +19,5 @@ namespace RCM.Backend.Models
         public virtual Supplier? Supplier { get; set; }
         public virtual ICollection<PurchaseOrderItem> PurchaseOrderItems { get; set; }
     }
+
 }

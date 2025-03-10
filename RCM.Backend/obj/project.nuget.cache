@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "qb4/BK78HPs=",
+  "dgSpecHash": "0C9B1rdxbb0=",
   "success": true,
   "projectFilePath": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\RCM.Backend.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\thien\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\thien\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\thien\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.36\\microsoft.aspnetcore.authentication.jwtbearer.6.0.36.nupkg.sha512",
     "C:\\Users\\thien\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

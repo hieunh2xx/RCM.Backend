@@ -337,3 +337,4 @@ D:\BE_RCM\RCM.Backend\RCM.Backend\obj\Debug\net6.0\refint\RCM.Backend.dll
 D:\BE_RCM\RCM.Backend\RCM.Backend\obj\Debug\net6.0\RCM.Backend.pdb
 D:\BE_RCM\RCM.Backend\RCM.Backend\obj\Debug\net6.0\RCM.Backend.genruntimeconfig.cache
 D:\BE_RCM\RCM.Backend\RCM.Backend\obj\Debug\net6.0\ref\RCM.Backend.dll
+D:\BE_RCM\RCM.Backend\RCM.Backend\bin\Debug\net6.0\BCrypt.Net-Next.dll
