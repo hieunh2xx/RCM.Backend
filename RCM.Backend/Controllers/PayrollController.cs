@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Bibliography;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RCM.Backend.Models;
@@ -283,5 +284,57 @@ public class PayrollController : ControllerBase
 
         return Ok(result);
     }
+    [HttpPut("update-salary")]
+    public async Task<IActionResult> UpdateSalaryByEmployeeIdAndMonth([FromBody] Salary request)
+    {
+        if (request == null || request.EmployeeId <= 0 || request.StartDate == null)
+        {
+            return BadRequest("Dữ liệu yêu cầu không hợp lệ.");
+        }
+
+        int month = request.StartDate.Value.Month;
+        int year = request.StartDate.Value.Year;
+
+        var salaryRecord = await _context.Salaries
+            .FirstOrDefaultAsync(s => s.EmployeeId == request.EmployeeId &&
+                                      s.StartDate.HasValue &&
+                                      s.StartDate.Value.Month == month &&
+                                      s.StartDate.Value.Year == year);
+
+        if (salaryRecord == null)
+        {
+            return NotFound("Không tìm thấy bảng lương của nhân viên trong tháng và năm đã cho.");
+        }
+
+        // Cập nhật dữ liệu lương
+        salaryRecord.FixedSalary = request.FixedSalary;
+        salaryRecord.BonusSalary = request.BonusSalary;
+        salaryRecord.Penalty = request.Penalty;
+
+        // Tính toán lại tổng lương
+        int totalWorkDays = await _context.AttendanceHis
+            .Where(a => a.EmployeeId == request.EmployeeId &&
+                        a.AttendanceDate.Month == month &&
+                        a.AttendanceDate.Year == year)
+            .CountAsync();
+
+        decimal dailySalary = (salaryRecord.FixedSalary ?? 0) / 30;
+        salaryRecord.FinalSalary = (int)((dailySalary * totalWorkDays) + (request.BonusSalary ?? 0) - (request.Penalty ?? 0));
+
+        await _context.SaveChangesAsync();
+
+        return Ok(new
+        {
+            salaryRecord.EmployeeId,
+            EmployeeName = salaryRecord.Employee.FullName,
+            Month = month,
+            Year = year,
+            FixedSalary = salaryRecord.FixedSalary ?? 0,
+            BonusSalary = salaryRecord.BonusSalary ?? 0,
+            Penalty = salaryRecord.Penalty ?? 0,
+            TotalSalary = salaryRecord.FinalSalary ?? 0
+        });
+    }
+
 
 }
