@@ -2,6 +2,7 @@
 using DocumentFormat.OpenXml.Bibliography;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RCM.Backend.DTO;
 using RCM.Backend.Models;
 using System;
 using System.IO;
@@ -273,7 +274,7 @@ public class PayrollController : ControllerBase
         return Ok(result);
     }
     [HttpPut("update-salary")]
-    public async Task<IActionResult> UpdateSalaryByEmployeeIdAndMonth([FromBody] Salary request)
+    public async Task<IActionResult> UpdateSalaryByEmployeeIdAndMonth([FromBody] SalaryDTO request)
     {
         if (request == null || request.EmployeeId <= 0 || request.StartDate == null)
         {
@@ -284,6 +285,7 @@ public class PayrollController : ControllerBase
         int year = request.StartDate.Value.Year;
 
         var salaryRecord = await _context.Salaries
+            .Include(s => s.Employee) // Đảm bảo Employee được load nếu cần dùng
             .FirstOrDefaultAsync(s => s.EmployeeId == request.EmployeeId &&
                                       s.StartDate.HasValue &&
                                       s.StartDate.Value.Month == month &&
@@ -294,10 +296,10 @@ public class PayrollController : ControllerBase
             return NotFound("Không tìm thấy bảng lương của nhân viên trong tháng và năm đã cho.");
         }
 
-        // Cập nhật dữ liệu lương
-        salaryRecord.FixedSalary = request.FixedSalary;
-        salaryRecord.BonusSalary = request.BonusSalary;
-        salaryRecord.Penalty = request.Penalty;
+        // Đảm bảo không có giá trị null khi tính toán
+        salaryRecord.FixedSalary = request.FixedSalary ?? 0;
+        salaryRecord.BonusSalary = request.BonusSalary ?? 0;
+        salaryRecord.Penalty = request.Penalty ?? 0;
 
         // Tính toán lại tổng lương
         int totalWorkDays = await _context.AttendanceHis
@@ -306,23 +308,24 @@ public class PayrollController : ControllerBase
                         a.AttendanceDate.Year == year)
             .CountAsync();
 
-        decimal dailySalary = (salaryRecord.FixedSalary ?? 0) / 30;
-        salaryRecord.FinalSalary = (int)((dailySalary * totalWorkDays) + (request.BonusSalary ?? 0) - (request.Penalty ?? 0));
+        decimal dailySalary = (decimal)salaryRecord.FixedSalary / 30; // Chắc chắn không bị null
+        salaryRecord.FinalSalary = (int)((dailySalary * totalWorkDays) + salaryRecord.BonusSalary - salaryRecord.Penalty);
 
         await _context.SaveChangesAsync();
 
         return Ok(new
         {
             salaryRecord.EmployeeId,
-            EmployeeName = salaryRecord.Employee.FullName,
+            EmployeeName = salaryRecord.Employee?.FullName ?? "Không xác định", // Tránh null khi Employee không tồn tại
             Month = month,
             Year = year,
-            FixedSalary = salaryRecord.FixedSalary ?? 0,
-            BonusSalary = salaryRecord.BonusSalary ?? 0,
-            Penalty = salaryRecord.Penalty ?? 0,
-            TotalSalary = salaryRecord.FinalSalary ?? 0
+            FixedSalary = salaryRecord.FixedSalary,
+            BonusSalary = salaryRecord.BonusSalary,
+            Penalty = salaryRecord.Penalty,
+            TotalSalary = salaryRecord.FinalSalary
         });
     }
+
 
 
 }
