@@ -17,6 +17,113 @@ public class PayrollController : ControllerBase
     {
         _context = context;
     }
+    [HttpPost("getAllPayroll")]
+    public async Task<IActionResult> CalculateAndSavePayrollForAllEmployees(
+       [FromQuery] int month,
+       [FromQuery] int year)
+    {
+        var startDate = new DateTime(year, month, 1);
+        var endDate = startDate.AddMonths(1).AddDays(-1); // Ngày cuối tháng
+
+        // Kiểm tra xem đã tính toán lương cho tháng này chưa
+        bool payrollExists = await _context.Salaries
+            .AnyAsync(s => s.StartDate != null &&
+                           s.StartDate.Value.Month == month &&
+                           s.StartDate.Value.Year == year);
+
+        // Lấy danh sách nhân viên
+        var employees = await _context.Employees.AsNoTracking().ToListAsync();
+        var employeeIds = employees.Select(e => e.Id).ToList();
+
+        // Lấy số ngày làm việc của tất cả nhân viên trong tháng
+        var attendanceCounts = await _context.AttendanceHis
+            .Where(a => employeeIds.Contains(a.EmployeeId) &&
+                        a.AttendanceDate.Month == month &&
+                        a.AttendanceDate.Year == year)
+            .GroupBy(a => a.EmployeeId)
+            .Select(g => new { EmployeeId = g.Key, TotalWorkDays = g.Count() })
+            .ToDictionaryAsync(x => x.EmployeeId, x => x.TotalWorkDays);
+
+        // Lấy danh sách lương đã có trong tháng
+        var existingSalaries = await _context.Salaries
+            .Where(s => employeeIds.Contains(s.EmployeeId) &&
+                        s.StartDate != null &&
+                        s.StartDate.Value.Month == month &&
+                        s.StartDate.Value.Year == year)
+            .ToDictionaryAsync(s => s.EmployeeId);
+
+        var salaryRecords = new List<object>();
+
+        foreach (var employee in employees)
+        {
+            int totalWorkDays = attendanceCounts.ContainsKey(employee.Id) ? attendanceCounts[employee.Id] : 0;
+            Salary salaryRecord;
+
+            if (payrollExists)
+            {
+                if (existingSalaries.TryGetValue(employee.Id, out salaryRecord))
+                {
+                    // Nếu đã có, cập nhật FinalSalary
+                    decimal dailySalary = (salaryRecord.FixedSalary ?? 0) / 30;
+                    salaryRecord.FinalSalary = (int)((dailySalary * totalWorkDays)
+                                                    + (salaryRecord.BonusSalary ?? 0)
+                                                    - (salaryRecord.Penalty ?? 0));
+                }
+                else
+                {
+                    // Nếu chưa có, thêm mới cho nhân viên này
+                    salaryRecord = new Salary
+                    {
+                        EmployeeId = employee.Id,
+                        FixedSalary = employee.FixedSalary,
+                        StartDate = startDate,
+                        EndDate = endDate,
+                        BonusSalary = 0,
+                        Penalty = 0,
+                        FinalSalary = (int)(((employee.FixedSalary ?? 0) / 30) * totalWorkDays)
+                    };
+
+                    _context.Salaries.Add(salaryRecord);
+                }
+            }
+            else
+            {
+                // Nếu chưa có lương tháng này, tạo mới cho tất cả nhân viên
+                salaryRecord = new Salary
+                {
+                    EmployeeId = employee.Id,
+                    FixedSalary = employee.FixedSalary,
+                    StartDate = startDate,
+                    EndDate = endDate,
+                    BonusSalary = 0,
+                    Penalty = 0,
+                    FinalSalary = (int)(((employee.FixedSalary ?? 0) / 30) * totalWorkDays)
+                };
+
+                _context.Salaries.Add(salaryRecord);
+            }
+
+            // Lưu dữ liệu vào danh sách kết quả
+            salaryRecords.Add(new
+            {
+                salaryRecord.EmployeeId,
+                EmployeeName = employee.FullName,
+                Phone = employee.PhoneNumber,
+                FixedSalary = salaryRecord.FixedSalary ?? 0,
+                TotalWorkDays = totalWorkDays,
+                DailySalary = (salaryRecord.FixedSalary ?? 0) / 30,
+                BonusSalary = salaryRecord.BonusSalary ?? 0,
+                Penalty = salaryRecord.Penalty ?? 0,
+                TotalSalary = salaryRecord.FinalSalary ?? 0
+            });
+        }
+
+        // Lưu tất cả thay đổi vào database
+        await _context.SaveChangesAsync();
+
+        return Ok(salaryRecords);
+    }
+
 
     /// <summary>
     /// Lấy chi tiết Payroll theo tháng, năm

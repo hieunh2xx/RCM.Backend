@@ -3,8 +3,36 @@
   "WorkspaceRootPath": "D:\\BE_RCM\\RCM.Backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\controllers\\payrollcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\controllers\\payrollcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\models\\salary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\models\\salary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\dto\\employeedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\dto\\employeedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\models\\retailchaincontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\models\\retailchaincontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\rcm.backend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\rcm.backend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\models\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\models\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -15,10 +43,6 @@
       "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\models\\auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\models\\auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -27,32 +51,12 @@
       "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\dto\\accountdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\models\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\models\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\dto\\employeedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\dto\\employeedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\models\\attendancehi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\models\\attendancehi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\controllers\\payrollcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\controllers\\payrollcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\models\\salary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\models\\salary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\models\\retailchaincontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\models\\retailchaincontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\controllers\\employeecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -69,10 +73,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\controllers\\warehousescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\controllers\\warehousescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\rcm.backend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\rcm.backend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\models\\purchaseorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -94,7 +94,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -102,7 +102,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 8,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\appsettings.Development.json",
               "RelativeDocumentMoniker": "RCM.Backend\\appsettings.Development.json",
@@ -110,36 +110,38 @@
               "RelativeToolTip": "RCM.Backend\\appsettings.Development.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-03-10T14:17:12.878Z"
+              "WhenOpened": "2025-03-10T14:17:12.878Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "StaffController.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Controllers\\StaffController.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Controllers\\StaffController.cs",
               "ToolTip": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Controllers\\StaffController.cs",
               "RelativeToolTip": "RCM.Backend\\Controllers\\StaffController.cs",
-              "ViewState": "AQIAALoAAAAAAAAAAAAwwMgAAAAGAAAA",
+              "ViewState": "AQIAADcBAAAAAAAAAAAAwKoBAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-10T05:01:39.418Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Account.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Models\\Account.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Models\\Account.cs",
               "ToolTip": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Models\\Account.cs",
               "RelativeToolTip": "RCM.Backend\\Models\\Account.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAZAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAUAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-07T12:54:13.13Z"
+              "WhenOpened": "2025-03-07T12:54:13.13Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 6,
               "Title": "RCM.Backend.csproj",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\RCM.Backend.csproj",
               "RelativeDocumentMoniker": "RCM.Backend\\RCM.Backend.csproj",
@@ -147,59 +149,77 @@
               "RelativeToolTip": "RCM.Backend\\RCM.Backend.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-02-28T05:28:04.736Z"
+              "WhenOpened": "2025-02-28T05:28:04.736Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 5,
               "Title": "RetailChainContext.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Models\\RetailChainContext.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Models\\RetailChainContext.cs",
               "ToolTip": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Models\\RetailChainContext.cs",
               "RelativeToolTip": "RCM.Backend\\Models\\RetailChainContext.cs",
-              "ViewState": "AQIAABkAAAAAAAAAAAAUwHgCAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-10T05:01:50.923Z"
+              "WhenOpened": "2025-03-10T05:01:50.923Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Employee.cs",
-              "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Models\\Employee.cs",
-              "RelativeDocumentMoniker": "RCM.Backend\\Models\\Employee.cs",
-              "ToolTip": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Models\\Employee.cs",
-              "RelativeToolTip": "RCM.Backend\\Models\\Employee.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAswBYAAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-10T05:05:42.646Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "AuthController.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Controllers\\AuthController.cs",
               "ToolTip": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Controllers\\AuthController.cs",
               "RelativeToolTip": "RCM.Backend\\Controllers\\AuthController.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAAFMAAAAAAAAA",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAACcAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-07T12:52:55.191Z"
+              "WhenOpened": "2025-03-07T12:52:55.191Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "AccountDTO.cs",
-              "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\DTO\\AccountDTO.cs",
-              "RelativeDocumentMoniker": "RCM.Backend\\DTO\\AccountDTO.cs",
-              "ToolTip": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\DTO\\AccountDTO.cs",
-              "RelativeToolTip": "RCM.Backend\\DTO\\AccountDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
+              "DocumentIndex": 0,
+              "Title": "PayrollController.cs",
+              "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Controllers\\PayrollController.cs",
+              "RelativeDocumentMoniker": "RCM.Backend\\Controllers\\PayrollController.cs",
+              "ToolTip": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Controllers\\PayrollController.cs",
+              "RelativeToolTip": "RCM.Backend\\Controllers\\PayrollController.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAowEEAAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-10T05:15:53.536Z"
+              "WhenOpened": "2025-03-10T09:43:08.216Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
+              "Title": "EmployeeDTO.cs",
+              "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\DTO\\EmployeeDTO.cs",
+              "RelativeDocumentMoniker": "RCM.Backend\\DTO\\EmployeeDTO.cs",
+              "ToolTip": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\DTO\\EmployeeDTO.cs",
+              "RelativeToolTip": "RCM.Backend\\DTO\\EmployeeDTO.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAswBEAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-10T05:07:47.101Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Salary.cs",
+              "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Models\\Salary.cs",
+              "RelativeDocumentMoniker": "RCM.Backend\\Models\\Salary.cs",
+              "ToolTip": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Models\\Salary.cs",
+              "RelativeToolTip": "RCM.Backend\\Models\\Salary.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-10T09:54:17.126Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "auth.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Models\\auth.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Models\\auth.cs",
@@ -211,7 +231,31 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 11,
+              "Title": "AccountDTO.cs",
+              "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\DTO\\AccountDTO.cs",
+              "RelativeDocumentMoniker": "RCM.Backend\\DTO\\AccountDTO.cs",
+              "ToolTip": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\DTO\\AccountDTO.cs",
+              "RelativeToolTip": "RCM.Backend\\DTO\\AccountDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-10T05:15:53.536Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Employee.cs",
+              "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Models\\Employee.cs",
+              "RelativeDocumentMoniker": "RCM.Backend\\Models\\Employee.cs",
+              "ToolTip": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Models\\Employee.cs",
+              "RelativeToolTip": "RCM.Backend\\Models\\Employee.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAswBYAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-10T05:05:42.646Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\appsettings.json",
               "RelativeDocumentMoniker": "RCM.Backend\\appsettings.json",
@@ -223,31 +267,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "EmployeeDTO.cs",
-              "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\DTO\\EmployeeDTO.cs",
-              "RelativeDocumentMoniker": "RCM.Backend\\DTO\\EmployeeDTO.cs",
-              "ToolTip": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\DTO\\EmployeeDTO.cs",
-              "RelativeToolTip": "RCM.Backend\\DTO\\EmployeeDTO.cs",
-              "ViewState": "AQIAABYAAAAAAAAAAAA2wBwAAAAXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-10T05:07:47.101Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "PayrollController.cs",
-              "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Controllers\\PayrollController.cs",
-              "RelativeDocumentMoniker": "RCM.Backend\\Controllers\\PayrollController.cs",
-              "ToolTip": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Controllers\\PayrollController.cs",
-              "RelativeToolTip": "RCM.Backend\\Controllers\\PayrollController.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAA3wDsAAAA4AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-10T09:43:08.216Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "AttendanceHi.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Models\\AttendanceHi.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Models\\AttendanceHi.cs",
@@ -259,19 +279,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Salary.cs",
-              "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Models\\Salary.cs",
-              "RelativeDocumentMoniker": "RCM.Backend\\Models\\Salary.cs",
-              "ToolTip": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Models\\Salary.cs",
-              "RelativeToolTip": "RCM.Backend\\Models\\Salary.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-10T09:54:17.126Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "WarehousesController.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Controllers\\WarehousesController.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Controllers\\WarehousesController.cs",
@@ -283,7 +291,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "EmployeeController.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Controllers\\EmployeeController.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Controllers\\EmployeeController.cs",
@@ -307,7 +315,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "AttendanceController.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Controllers\\AttendanceController.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Controllers\\AttendanceController.cs",
@@ -319,7 +327,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Program.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Program.cs",
@@ -338,7 +346,8 @@
               "ToolTip": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\RCM.Backend.csproj",
               "RelativeToolTip": "RCM.Backend\\RCM.Backend.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-03-06T13:33:22.029Z"
+              "WhenOpened": "2025-03-06T13:33:22.029Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

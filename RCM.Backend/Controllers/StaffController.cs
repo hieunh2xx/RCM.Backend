@@ -1,6 +1,8 @@
-﻿using CsvHelper;
+﻿using ClosedXML.Excel;
+using CsvHelper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 using RCM.Backend.DTO;
 using RCM.Backend.Models;
@@ -128,42 +130,8 @@ namespace RCM.Backend.Controllers
             return Ok(new { message = "Employee updated successfully!" });
         }
 
-        [HttpPost("add-account")]
-        public IActionResult AddAccountForStaff([FromBody] AccountDTO request)
-        {
-            var employee = _context.Employees.FirstOrDefault(e => e.Id == request.EmployeeId && e.WorkShiftId.HasValue);
-            if (employee == null)
-            {
-                return NotFound(new { message = "Staff not found!" });
-            }
-
-            // Kiểm tra xem nhân viên đã có tài khoản chưa
-            bool accountExists = _context.Accounts.Any(a => a.EmployeeId == request.EmployeeId);
-            if (accountExists)
-            {
-                return BadRequest(new { message = "This staff already has an account!" });
-            }
-
-            // Mã hoá mật khẩu (nếu có hash)
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
-
-            // Tạo tài khoản mới
-            var newAccount = new Account
-            {
-                EmployeeId = request.EmployeeId,
-                Username = request.Username,
-                PasswordHash = hashedPassword,
-                Role = request.Role
-            };
-
-            _context.Accounts.Add(newAccount);
-            _context.SaveChanges();
-
-            return Ok(new { message = "Account created successfully!" });
-        }
-
         [HttpPost("add-employee")]
-        public IActionResult AddEmployee([FromBody] EmployeeDTO request)
+        public IActionResult AddStaff([FromBody] EmployeeDTO request)
         {
             if (request == null)
             {
@@ -188,18 +156,66 @@ namespace RCM.Backend.Controllers
                 PhoneNumber = request.PhoneNumber,
                 WorkShiftId = request.WorkShiftId,
                 FixedSalary = request.FixedSalary,
-                ActiveStatus = request.ActiveStatus ?? true, 
-                StartDate =  DateTime.Now,
+                ActiveStatus = request.ActiveStatus ?? true,
+                StartDate = DateTime.Now,
                 BranchId = request.BranchId
             };
 
             _context.Employees.Add(newEmployee);
             _context.SaveChanges();
 
-            return Ok(new { message = "Employee added successfully!", EmployeeId = newEmployee.Id });
+            var newAccount = new Account
+            {
+                EmployeeId = newEmployee.Id,
+                Username = request.Username,
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.PasswordHash),
+                Role = request.Role
+            };
+
+            _context.Accounts.Add(newAccount);
+            _context.SaveChanges();
+
+            return Ok(new { message = "Staff added successfully!", EmployeeId = newEmployee.Id });
         }
+
+        //[HttpPost("add-employee")]
+        //public IActionResult AddEmployee([FromBody] EmployeeDTO request)
+        //{
+        //    if (request == null)
+        //    {
+        //        return BadRequest(new { message = "Invalid request data!" });
+        //    }
+
+        //    bool exists = _context.Employees.Any(e => e.IdentityNumber == request.IdentityNumber || e.PhoneNumber == request.PhoneNumber);
+        //    if (exists)
+        //    {
+        //        return BadRequest(new { message = "Identity number or phone number already exists!" });
+        //    }
+
+        //    var newEmployee = new Employee
+        //    {
+        //        Image = request.Image,
+        //        FullName = request.FullName,
+        //        Gender = request.Gender,
+        //        BirthDate = request.BirthDate,
+        //        IdentityNumber = request.IdentityNumber,
+        //        Hometown = request.Hometown,
+        //        CurrentAddress = request.CurrentAddress,
+        //        PhoneNumber = request.PhoneNumber,
+        //        WorkShiftId = request.WorkShiftId,
+        //        FixedSalary = request.FixedSalary,
+        //        ActiveStatus = request.ActiveStatus ?? true, 
+        //        StartDate =  DateTime.Now,
+        //        BranchId = request.BranchId
+        //    };
+
+        //    _context.Employees.Add(newEmployee);
+        //    _context.SaveChanges();
+
+        //    return Ok(new { message = "Employee added successfully!", EmployeeId = newEmployee.Id });
+        //}
         [HttpPost("import")]
-        public IActionResult ImportEmployees(IFormFile file)
+        public IActionResult ImportStaff(IFormFile file)
         {
             if (file == null || file.Length == 0)
             {
@@ -207,8 +223,9 @@ namespace RCM.Backend.Controllers
             }
 
             var employees = new List<Employee>();
-            var existingPhoneNumbers = _context.Employees.Select(e => e.PhoneNumber).ToHashSet(); // Lấy tất cả số điện thoại đã tồn tại
-            var newPhoneNumbers = new HashSet<string>(); // Lưu số điện thoại trong file để kiểm tra trùng lặp nội bộ
+            var accounts = new List<Account>();
+            var existingPhoneNumbers = _context.Employees.Select(e => e.PhoneNumber).ToHashSet();
+            var newPhoneNumbers = new HashSet<string>();
 
             var extension = Path.GetExtension(file.FileName).ToLower();
 
@@ -223,20 +240,19 @@ namespace RCM.Backend.Controllers
                         int rowCount = worksheet.Dimension.Rows;
                         var duplicatePhoneNumbers = new List<string>();
 
-                        for (int row = 2; row <= rowCount; row++) // Bỏ qua tiêu đề
+                        for (int row = 2; row <= rowCount; row++)
                         {
                             string phoneNumber = worksheet.Cells[row, 4].Value?.ToString();
 
-                            if (string.IsNullOrWhiteSpace(phoneNumber)) continue; // Bỏ qua nếu không có số điện thoại
+                            if (string.IsNullOrWhiteSpace(phoneNumber)) continue;
 
-                            // Kiểm tra nếu số điện thoại đã tồn tại trong database hoặc bị trùng trong file
                             if (existingPhoneNumbers.Contains(phoneNumber) || newPhoneNumbers.Contains(phoneNumber))
                             {
                                 duplicatePhoneNumbers.Add(phoneNumber);
-                                continue; // Bỏ qua nhân viên này
+                                continue;
                             }
 
-                            newPhoneNumbers.Add(phoneNumber); // Thêm vào danh sách số điện thoại mới
+                            newPhoneNumbers.Add(phoneNumber);
 
                             string roleValue = worksheet.Cells[row, 10].Value?.ToString();
                             byte role = (roleValue == "Staff") ? (byte)2 : (byte)0;
@@ -284,7 +300,6 @@ namespace RCM.Backend.Controllers
                             employees.Add(employee);
                         }
 
-                        // Nếu có số điện thoại trùng, trả về lỗi
                         if (duplicatePhoneNumbers.Count > 0)
                         {
                             return BadRequest(new
@@ -301,120 +316,114 @@ namespace RCM.Backend.Controllers
                 return BadRequest(new { message = "Chỉ hỗ trợ file Excel (.xlsx, .xls) hoặc CSV!" });
             }
 
-            if (employees.Count == 0)
+            _context.Employees.AddRange(employees);
+            _context.SaveChanges();
+
+            foreach (var emp in employees)
             {
-                return BadRequest(new { message = "Không có dữ liệu hợp lệ trong file!" });
+                accounts.Add(new Account
+                {
+                    EmployeeId = emp.Id,
+                    Username = emp.PhoneNumber,
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword("123456789"),
+                    Role = 2
+                });
             }
 
-            _context.Employees.AddRange(employees);
+            _context.Accounts.AddRange(accounts);
             _context.SaveChanges();
 
             return Ok(new { message = "Import thành công!", totalEmployees = employees.Count });
         }
 
         [HttpGet("export")]
-        public IActionResult ExportStaff([FromQuery] string? format = "xlsx")
+        public async Task<IActionResult> ExportStaff()
         {
-            var staffList = _context.Employees
+            var staffList = await _context.Employees
                 .Join(_context.Accounts,
                       e => e.Id,
                       a => a.EmployeeId,
                       (e, a) => new { Employee = e, Account = a })
                 .Where(ea => ea.Employee.WorkShiftId.HasValue && ea.Account.Role == 2)
-                .Select(ea => new StaffExportDTO
+                .Select(ea => new
                 {
-                    FullName = ea.Employee.FullName,
-                    Gender = ea.Employee.Gender,
-                    BirthDate = ea.Employee.BirthDate,
-                    PhoneNumber = ea.Employee.PhoneNumber,
-                    WorkShiftId = ea.Employee.WorkShiftId,
-                    ActiveStatus = ea.Employee.ActiveStatus,
-                    StartDate = ea.Employee.StartDate,
-                    BranchId = ea.Employee.BranchId,
-                    Username = ea.Account.Username,
+                    ea.Employee.Id,
+                    ea.Employee.FullName,
+                    ea.Employee.Gender,
+                    BirthDate = ea.Employee.BirthDate.ToString("yyyy-MM-dd"),
+                    ea.Employee.PhoneNumber,
+                    ea.Employee.WorkShiftId,
+                    ea.Employee.ActiveStatus,
+                    StartDate = ea.Employee.StartDate.ToString("yyyy-MM-dd"),
+                    ea.Employee.BranchId,
+                    ea.Account.Username,
                     Role = ea.Account.Role == 2 ? "Staff" : "Unknown"
                 })
-                .ToList();
+                .ToListAsync();
 
-            if (staffList.Count == 0)
+            using var workbook = new XLWorkbook();
+            var worksheet = workbook.Worksheets.Add("Staff Data");
+
+            var headers = new string[]
             {
-                return NotFound(new { message = "Không có dữ liệu để export!" });
+        "EmployeeID", "FullName", "Gender", "BirthDate", "PhoneNumber",
+        "WorkShiftID", "ActiveStatus", "StartDate", "BranchID", "Username", "Role"
+            };
+
+            for (int i = 0; i < headers.Length; i++)
+            {
+                worksheet.Cell(1, i + 1).Value = headers[i];
             }
 
-            if (format.ToLower() == "csv")
+            int row = 2;
+            foreach (var staff in staffList)
             {
-                return ExportToCsv(staffList);
+                worksheet.Cell(row, 1).Value = staff.Id;
+                worksheet.Cell(row, 2).Value = staff.FullName;
+                worksheet.Cell(row, 3).Value = staff.Gender;
+                worksheet.Cell(row, 4).Value = staff.BirthDate;
+                worksheet.Cell(row, 5).Value = staff.PhoneNumber;
+                worksheet.Cell(row, 6).Value = staff.WorkShiftId;
+                worksheet.Cell(row, 7).Value = staff.ActiveStatus.HasValue && staff.ActiveStatus.Value ? "True" : "False";
+                worksheet.Cell(row, 8).Value = staff.StartDate;
+                worksheet.Cell(row, 9).Value = staff.BranchId;
+                worksheet.Cell(row, 10).Value = staff.Username;
+                worksheet.Cell(row, 11).Value = staff.Role;
+                row++;
             }
-            else
-            {
-                return ExportToExcel(staffList);
-            }
+
+            using var stream = new MemoryStream();
+            workbook.SaveAs(stream);
+            var content = stream.ToArray();
+
+            return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "StaffList.xlsx");
         }
 
-
-        /// <summary>
-        /// Xuất file Excel từ danh sách nhân viên.
-        /// </summary>
-        private IActionResult ExportToExcel(List<StaffExportDTO> staffList)
+        [HttpGet("download-template")]
+        public IActionResult DownloadTemplate()
         {
-            using (var package = new ExcelPackage())
+            using (var workbook = new XLWorkbook())
             {
-                var worksheet = package.Workbook.Worksheets.Add("Staff Data");
+                var worksheet = workbook.Worksheets.Add("Staff Template");
+                worksheet.Cell(1, 1).Value = "Full Name";
+                worksheet.Cell(1, 2).Value = "Gender";
+                worksheet.Cell(1, 3).Value = "Birth Date (yyyy-MM-dd)";
+                worksheet.Cell(1, 4).Value = "Identity Number";
+                worksheet.Cell(1, 5).Value = "Hometown";
+                worksheet.Cell(1, 6).Value = "Current Address";
+                worksheet.Cell(1, 7).Value = "Phone Number";
+                worksheet.Cell(1, 8).Value = "Work Shift ID";
+                worksheet.Cell(1, 9).Value = "Fixed Salary";
+                worksheet.Cell(1, 10).Value = "Branch ID";
+                worksheet.Cell(1, 11).Value = "Role (Staff=2, Admin=1)";
 
-                // Header
-                worksheet.Cells[1, 1].Value = "FullName";
-                worksheet.Cells[1, 2].Value = "Gender";
-                worksheet.Cells[1, 3].Value = "BirthDate";
-                worksheet.Cells[1, 4].Value = "PhoneNumber";
-                worksheet.Cells[1, 5].Value = "WorkShiftId";
-                worksheet.Cells[1, 6].Value = "ActiveStatus";
-                worksheet.Cells[1, 7].Value = "StartDate";
-                worksheet.Cells[1, 8].Value = "BranchID";
-                worksheet.Cells[1, 9].Value = "Username";
-                worksheet.Cells[1, 10].Value = "Role";
-
-                // Data
-                for (int i = 0; i < staffList.Count; i++)
+                using (var stream = new MemoryStream())
                 {
-                    var staff = staffList[i];
-                    worksheet.Cells[i + 2, 1].Value = staff.FullName;
-                    worksheet.Cells[i + 2, 2].Value = staff.Gender;
-                    worksheet.Cells[i + 2, 3].Value = staff.BirthDate.ToString("yyyy-MM-dd");
-                    worksheet.Cells[i + 2, 4].Value = staff.PhoneNumber;
-                    worksheet.Cells[i + 2, 5].Value = staff.WorkShiftId;
-                    worksheet.Cells[i + 2, 6].Value = staff.ActiveStatus;
-                    worksheet.Cells[i + 2, 7].Value = staff.StartDate.ToString("yyyy-MM-dd");
-                    worksheet.Cells[i + 2, 8].Value = staff.BranchId;
-                    worksheet.Cells[i + 2, 9].Value = staff.Username;
-                    worksheet.Cells[i + 2, 10].Value = staff.Role;
+                    workbook.SaveAs(stream);
+                    var content = stream.ToArray();
+                    return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Staff_Template.xlsx");
                 }
-
-                worksheet.Cells.AutoFitColumns();
-
-                var stream = new MemoryStream();
-                package.SaveAs(stream);
-                stream.Position = 0;
-
-                string fileName = $"StaffData_{DateTime.Now:yyyyMMddHHmmss}.xlsx";
-                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
             }
-        }
-
-        /// <summary>
-        /// Xuất file CSV từ danh sách nhân viên.
-        /// </summary>
-        private IActionResult ExportToCsv(List<StaffExportDTO> staffList)
-        {
-            var stream = new MemoryStream();
-            using (var writer = new StreamWriter(stream, System.Text.Encoding.UTF8))
-            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
-            {
-                csv.WriteRecords(staffList);
-            }
-
-            stream.Position = 0;
-            string fileName = $"StaffData_{DateTime.Now:yyyyMMddHHmmss}.csv";
-            return File(stream, "text/csv", fileName);
         }
 
     }
