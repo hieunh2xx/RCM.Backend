@@ -37,13 +37,14 @@ namespace RCM.Backend.Controllers
 
             // Tạo JWT token
             var tokenString = GenerateJwtToken(account);
-
+             
             return Ok(new
             {
                 token = tokenString,
                 role = account.Role,
-                username = account.Username
-            });
+                username = account.Username,
+           employeeId = account.EmployeeId
+        });
         }
 
         private string GenerateJwtToken(Account account)

@@ -7,12 +7,16 @@
       "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|solutionrelative:rcm.backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1D92C30B-A037-441C-9CAC-723699009232}|RCM.Backend\\RCM.Backend.csproj|d:\\be_rcm\\rcm.backend\\rcm.backend\\models\\auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -98,15 +102,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "EmployeeDTO.cs",
-              "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\DTO\\EmployeeDTO.cs",
-              "RelativeDocumentMoniker": "RCM.Backend\\DTO\\EmployeeDTO.cs",
-              "ToolTip": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\DTO\\EmployeeDTO.cs",
-              "RelativeToolTip": "RCM.Backend\\DTO\\EmployeeDTO.cs",
-              "ViewState": "AQIAABYAAAAAAAAAAAA2wBwAAAAXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-10T05:07:47.101Z"
+              "DocumentIndex": 1,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "RCM.Backend\\appsettings.Development.json",
+              "ToolTip": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\appsettings.Development.json",
+              "RelativeToolTip": "RCM.Backend\\appsettings.Development.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-10T14:17:12.878Z"
             },
             {
               "$type": "Document",
@@ -114,16 +118,16 @@
               "Title": "StaffController.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Controllers\\StaffController.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Controllers\\StaffController.cs",
-              "ToolTip": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Controllers\\StaffController.cs*",
-              "RelativeToolTip": "RCM.Backend\\Controllers\\StaffController.cs*",
-              "ViewState": "AQIAAM8AAAAAAAAAAAAIwOMAAABHAAAA",
+              "ToolTip": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Controllers\\StaffController.cs",
+              "RelativeToolTip": "RCM.Backend\\Controllers\\StaffController.cs",
+              "ViewState": "AQIAALoAAAAAAAAAAAAwwMgAAAAGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-10T05:01:39.418Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Account.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Models\\Account.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Models\\Account.cs",
@@ -131,12 +135,11 @@
               "RelativeToolTip": "RCM.Backend\\Models\\Account.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-07T12:54:13.13Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-07T12:54:13.13Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "RCM.Backend.csproj",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\RCM.Backend.csproj",
               "RelativeDocumentMoniker": "RCM.Backend\\RCM.Backend.csproj",
@@ -148,7 +151,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "RetailChainContext.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Models\\RetailChainContext.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Models\\RetailChainContext.cs",
@@ -160,7 +163,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Employee.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Models\\Employee.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Models\\Employee.cs",
@@ -172,7 +175,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "AuthController.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Controllers\\AuthController.cs",
@@ -180,12 +183,11 @@
               "RelativeToolTip": "RCM.Backend\\Controllers\\AuthController.cs",
               "ViewState": "AQIAAA8AAAAAAAAAAAAAAFMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-07T12:52:55.191Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-07T12:52:55.191Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "AccountDTO.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\DTO\\AccountDTO.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\DTO\\AccountDTO.cs",
@@ -193,12 +195,11 @@
               "RelativeToolTip": "RCM.Backend\\DTO\\AccountDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-10T05:15:53.536Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-10T05:15:53.536Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "auth.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Models\\auth.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Models\\auth.cs",
@@ -206,8 +207,7 @@
               "RelativeToolTip": "RCM.Backend\\Models\\auth.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-07T12:56:26.191Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-07T12:56:26.191Z"
             },
             {
               "$type": "Document",
@@ -219,12 +219,23 @@
               "RelativeToolTip": "RCM.Backend\\appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-03-10T08:54:53.336Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-10T08:54:53.336Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
+              "Title": "EmployeeDTO.cs",
+              "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\DTO\\EmployeeDTO.cs",
+              "RelativeDocumentMoniker": "RCM.Backend\\DTO\\EmployeeDTO.cs",
+              "ToolTip": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\DTO\\EmployeeDTO.cs",
+              "RelativeToolTip": "RCM.Backend\\DTO\\EmployeeDTO.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAA2wBwAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-10T05:07:47.101Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "PayrollController.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Controllers\\PayrollController.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Controllers\\PayrollController.cs",
@@ -236,7 +247,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "AttendanceHi.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Models\\AttendanceHi.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Models\\AttendanceHi.cs",
@@ -248,7 +259,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "Salary.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Models\\Salary.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Models\\Salary.cs",
@@ -260,7 +271,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "WarehousesController.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Controllers\\WarehousesController.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Controllers\\WarehousesController.cs",
@@ -272,7 +283,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "EmployeeController.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Controllers\\EmployeeController.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Controllers\\EmployeeController.cs",
@@ -284,7 +295,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "PurchaseOrder.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Models\\PurchaseOrder.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Models\\PurchaseOrder.cs",
@@ -296,7 +307,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "AttendanceController.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Controllers\\AttendanceController.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Controllers\\AttendanceController.cs",
@@ -308,7 +319,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Program.cs",
               "RelativeDocumentMoniker": "RCM.Backend\\Program.cs",
@@ -320,7 +331,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "RCM.Backend",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\RCM.Backend.csproj",
               "RelativeDocumentMoniker": "RCM.Backend\\RCM.Backend.csproj",
@@ -331,7 +342,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "launchSettings.json",
               "DocumentMoniker": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "RCM.Backend\\Properties\\launchSettings.json",
