@@ -16,6 +16,9 @@ public class EmployeeDTO
     public int? BranchId { get; set; }
     public bool IsStaff { get; set; }
     public string PasswordHash { get; set; } = null!;
+    public decimal PenaltyAmount { get; set; }
+    public string Note { get; set; } = null!;
+    public string TotalPenaltyAmount { get; set; } = null!;
 
     // Các thuộc tính đang thiếu
     public string IdentityNumber { get; set; } = null!;
