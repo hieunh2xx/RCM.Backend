@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DataLayerObject.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using OfficeOpenXml.FormulaParsing.LexicalAnalysis;
 using RCM.Backend.DTO;
-using RCM.Backend.Models;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -27,7 +27,7 @@ namespace RCM.Backend.Controllers
 
      
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        public async Task<IActionResult> Login([FromBody] Login request)
         {
             var account = await _context.Accounts
                 .FirstOrDefaultAsync(a => a.Username == request.Username);

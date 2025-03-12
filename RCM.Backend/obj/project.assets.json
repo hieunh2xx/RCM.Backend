@@ -2263,6 +2263,19 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
+      },
+      "DataLayerObject/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.1"
+        },
+        "compile": {
+          "bin/placeholder/DataLayerObject.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DataLayerObject.dll": {}
+        }
       }
     }
   },
@@ -7206,6 +7219,11 @@
         "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512",
         "system.xml.xpath.xmldocument.nuspec"
       ]
+    },
+    "DataLayerObject/1.0.0": {
+      "type": "project",
+      "path": "../DataLayerObject/DataLayerObject.csproj",
+      "msbuildProject": "../DataLayerObject/DataLayerObject.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -7213,6 +7231,7 @@
       "BCrypt.Net-Next >= 4.0.3",
       "ClosedXML >= 0.104.2",
       "CsvHelper >= 27.2.1",
+      "DataLayerObject >= 1.0.0",
       "EPPlus >= 5.8.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.36",
       "Microsoft.EntityFrameworkCore >= 6.0.36",
@@ -7250,7 +7269,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\BE_RCM\\RCM.Backend\\DataLayerObject\\DataLayerObject.csproj": {
+              "projectPath": "D:\\BE_RCM\\RCM.Backend\\DataLayerObject\\DataLayerObject.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

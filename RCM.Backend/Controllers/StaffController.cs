@@ -1,11 +1,11 @@
 ﻿using ClosedXML.Excel;
 using CsvHelper;
+using DataLayerObject.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 using RCM.Backend.DTO;
-using RCM.Backend.Models;
 using System.Globalization;
 using static EmployeeDTO;
 
@@ -67,32 +67,43 @@ namespace RCM.Backend.Controllers
                       e => e.Id,
                       a => a.EmployeeId,
                       (e, a) => new { Employee = e, Account = a }) // Kết hợp Employees với Accounts
-                .Where(ea => ea.Employee.Id == id && ea.Employee.WorkShiftId.HasValue && ea.Account.Role == 2)
-                .Select(ea => new EmployeeDTO
+                .Join(_context.Salaries,
+                      ea => ea.Employee.Id,
+                      s => s.EmployeeId,
+                      (ea, s) => new { ea.Employee, ea.Account, Salary = s }) // Kết hợp với bảng lương
+                .Where(eas => eas.Employee.Id == id
+                           && eas.Employee.WorkShiftId.HasValue
+                           && eas.Account.Role == 2)
+                .Select(eas => new EmployeeDTO
                 {
-                    Id = ea.Employee.Id,
-                    Image = ea.Employee.Image,
-                    FullName = ea.Employee.FullName,
-                    Gender = ea.Employee.Gender,
-                    BirthDate = ea.Employee.BirthDate,
-                    PhoneNumber = ea.Employee.PhoneNumber,
-                    WorkShiftId = ea.Employee.WorkShiftId,
-                    ActiveStatus = ea.Employee.ActiveStatus,
-                    StartDate = ea.Employee.StartDate,
-                    BranchId = ea.Employee.BranchId,
+                    Id = eas.Employee.Id,
+                    Image = eas.Employee.Image,
+                    FullName = eas.Employee.FullName,
+                    Gender = eas.Employee.Gender,
+                    BirthDate = eas.Employee.BirthDate,
+                    PhoneNumber = eas.Employee.PhoneNumber,
+                    WorkShiftId = eas.Employee.WorkShiftId,
+                    ActiveStatus = eas.Employee.ActiveStatus,
+                    StartDate = eas.Employee.StartDate,
+                    BranchId = eas.Employee.BranchId,
                     IsStaff = true,
-                    Username = ea.Account.Username,
-                    Role = (byte)(ea.Account.Role ?? 0) // Fix lỗi ép kiểu byte?
+                    Username = eas.Account.Username,
+                    Role = (byte)(eas.Account.Role ?? 0), 
+                   CurrentAddress  = eas.Employee.CurrentAddress, 
+                    FixedSalary = eas.Salary.FixedSalary,
+                    IdentityNumber = eas.Employee.IdentityNumber,
+
                 })
                 .FirstOrDefault();
 
             if (employeeData == null)
             {
-                return NotFound(new { message = "Staff not found!" });
+                return NotFound(new { message = "Không tìm thấy nhân viên!" });
             }
 
             return Ok(employeeData);
         }
+
 
         [HttpPut("update-employee/{id}")]
         public IActionResult UpdateEmployee(int id, [FromBody] EmployeeDTO request)

@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DataLayerObject.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RCM.Backend.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,9 +14,12 @@ namespace RCM.Backend.Controllers
     public class AttendanceController : ControllerBase
     {
         private readonly RetailChainContext _context;
-        public AttendanceController(RetailChainContext context)
+        private readonly IConfiguration _configuration;
+
+        public AttendanceController(RetailChainContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         [HttpPost("CheckIn")]
@@ -23,18 +27,21 @@ namespace RCM.Backend.Controllers
         {
             if (request == null || request.EmployeeId <= 0)
             {
-                return BadRequest("Invalid request.");
+                return BadRequest("Dữ liệu không hợp lệ.");
             }
 
             var employee = await _context.Employees.FindAsync(request.EmployeeId);
             if (employee == null)
             {
-                return NotFound("Employee not found.");
+                return NotFound("Không tìm thấy nhân viên.");
             }
 
             var now = DateTime.Now;
             var currentTime = now.TimeOfDay;
-            var lateTime = new TimeSpan(8, 0, 0); // 8:00 AM
+            var lateTime = new TimeSpan(8, 0, 0); // 8:00 sáng
+
+            // Đọc số tiền phạt từ appsettings.json
+            int penaltyAmount = _configuration.GetValue<int>("PenaltySettings:LateCheckInPenalty");
 
             // Kiểm tra xem nhân viên đã check-in hôm nay chưa
             var existingAttendance = await _context.AttendanceHis
@@ -42,29 +49,48 @@ namespace RCM.Backend.Controllers
 
             if (existingAttendance != null)
             {
-                return BadRequest("Employee has already checked in today.");
+                return BadRequest("Nhân viên đã check-in hôm nay.");
             }
 
+            bool isOnTime = currentTime <= lateTime;
             var attendance = new AttendanceHi
             {
                 EmployeeId = request.EmployeeId,
                 AttendanceDate = now.Date,
-                Shift = "Morning",
+                Shift = "Ca sáng",
                 CheckInTime = now,
-                OnTime = currentTime <= lateTime ? 1 : 0
+                OnTime = isOnTime ? 1 : 0
             };
 
             _context.AttendanceHis.Add(attendance);
             await _context.SaveChangesAsync();
 
+            // Nếu nhân viên đi muộn, ghi nhận khoản phạt
+            if (!isOnTime)
+            {
+                var penalty = new PenaltyPayment
+                {
+                    EmployeeId = request.EmployeeId,
+                    Amount = penaltyAmount,
+                    PaymentDate = now.Date,
+                    Reason = "Đi làm muộn",
+                    PaymentMethod = 0, // 0 = Chưa thanh toán, nhân viên tự nộp phạt
+                    Note = "Chưa thanh toán tiền phạt đi làm muộn",
+                    IsDeleted = false
+                };
+
+                _context.PenaltyPayments.Add(penalty);
+                await _context.SaveChangesAsync();
+            }
+
             return Ok(new
             {
-                Message = "Check-in successful.",
-                Status = attendance.OnTime == 1 ? "On Time" : "Late",
-                CheckInTime = now.ToString("dd/MM/yyyy HH:mm:ss")
+                Thông_báo = "Check-in thành công.",
+                Trạng_thái = isOnTime ? "Đúng giờ" : "Đi muộn",
+                Thời_gian_checkin = now.ToString("dd/MM/yyyy HH:mm:ss"),
+                Tiền_phạt = isOnTime ? "Không có" : $"Bị phạt {penaltyAmount:N0} VNĐ (Chưa thanh toán)"
             });
         }
-
         [HttpPost("CheckOut")]
         public async Task<IActionResult> CheckOut([FromBody] CheckOutRequest request)
         {
