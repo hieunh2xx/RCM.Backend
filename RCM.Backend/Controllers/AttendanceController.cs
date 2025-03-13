@@ -78,7 +78,12 @@ namespace RCM.Backend.Controllers
                     Note = "Chưa thanh toán tiền phạt đi làm muộn",
                     IsDeleted = false
                 };
-
+                var salary = await _context.Salaries.FirstOrDefaultAsync(s => s.EmployeeId == request.EmployeeId && s.EndDate == null);
+                if (salary != null)
+                {
+                    salary.BonusSalary -= penaltyAmount;
+                    _context.Salaries.Update(salary);
+                }
                 _context.PenaltyPayments.Add(penalty);
                 await _context.SaveChangesAsync();
             }
