@@ -86,8 +86,14 @@ public class PayrollController : ControllerBase
             if (existingSalaries.TryGetValue(employee.Id, out salaryRecord))
             {
                 // Nếu đã có, cập nhật FinalSalary
-                decimal dailySalary = (salaryRecord.FixedSalary ?? 0) / 30;
+                decimal dailySalary = (salaryRecord.FixedSalary ?? 0) / 26;
                 salaryRecord.FinalSalary = (int)((dailySalary * totalWorkDays) + (salaryRecord.BonusSalary ?? 0));
+
+                if (totalWorkDays > 26)
+                {
+                    salaryRecord.BonusSalary = (salaryRecord.BonusSalary ?? 0) + 500000;
+                    salaryRecord.FinalSalary += 500000;
+                }
             }
             else
             {
@@ -98,8 +104,8 @@ public class PayrollController : ControllerBase
                     FixedSalary = employee.FixedSalary,
                     StartDate = startDate,
                     EndDate = endDate,
-                    BonusSalary = 0,
-                    FinalSalary = (int)(((employee.FixedSalary ?? 0) / 30) * totalWorkDays)
+                    BonusSalary = totalWorkDays > 26 ? 500000 : 0, // Nếu làm trên 26 ngày thì thưởng 500,000
+                    FinalSalary = (int)(((employee.FixedSalary ?? 0) / 26) * totalWorkDays) + (totalWorkDays > 26 ? 500000 : 0)
                 };
 
                 _context.Salaries.Add(salaryRecord);
@@ -113,7 +119,7 @@ public class PayrollController : ControllerBase
                 Phone = employee.PhoneNumber,
                 FixedSalary = salaryRecord.FixedSalary ?? 0,
                 TotalWorkDays = totalWorkDays,
-                DailySalary = (salaryRecord.FixedSalary ?? 0) / 30,
+                DailySalary = (salaryRecord.FixedSalary ?? 0) / 26,
                 BonusSalary = salaryRecord.BonusSalary ?? 0,
                 TotalSalary = salaryRecord.FinalSalary ?? 0,
                 IdentityNumber = employee.IdentityNumber,
@@ -222,7 +228,7 @@ public class PayrollController : ControllerBase
             Phone = salaryRecord.Employee.PhoneNumber,
             FixedSalary = salaryRecord.FixedSalary ?? 0,
             TotalWorkDays = totalWorkDays,
-            DailySalary = (salaryRecord.FixedSalary ?? 0) / 30,
+            DailySalary = (salaryRecord.FixedSalary ?? 0) / 26,
             BonusSalary = salaryRecord.BonusSalary ?? 0,
             TotalSalary = salaryRecord.FinalSalary ??
                           (((salaryRecord.FixedSalary ?? 0) / 30) * totalWorkDays
@@ -317,15 +323,15 @@ public class PayrollController : ControllerBase
                            p.PaymentDate.Value.Year == year);
 
         // Kiểm tra xem nhân viên đã nộp phạt hay chưa
-        bool hasPaidPenalty = await _context.PenaltyPayments
-            .AnyAsync(p => p.EmployeeId == request.EmployeeId &&
-                           p.PaymentDate.Value.Month == month &&
-                           p.PaymentDate.Value.Year == year);
+        //bool hasPaidPenalty = await _context.PenaltyPayments
+        //    .AnyAsync(p => p.EmployeeId == request.EmployeeId &&
+        //                   p.PaymentDate.Value.Month == month &&
+        //                   p.PaymentDate.Value.Year == year);
 
         // Nếu nhân viên chưa nhận lương và chưa nộp phạt, không cho cập nhật trạng thái Done
-        if (request.Status == "Done" && !hasReceivedSalary && !hasPaidPenalty)
+        if (request.Status == "Done" && !hasReceivedSalary)
         {
-            return BadRequest("Nhân viên chưa nhận lương hoặc chưa nộp phạt, không thể cập nhật trạng thái thành 'Done'.");
+            return BadRequest("Nhân viên chưa nhận lương, không thể cập nhật trạng thái thành 'Done'.");
         }
 
         // Cập nhật thông tin lương

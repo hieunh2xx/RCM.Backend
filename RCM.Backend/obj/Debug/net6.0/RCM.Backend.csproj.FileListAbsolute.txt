@@ -441,3 +441,17 @@ D:\BE_RCM\RCM.Backend\RCM.Backend\obj\Debug\net6.0\refint\RCM.Backend.dll
 D:\BE_RCM\RCM.Backend\RCM.Backend\obj\Debug\net6.0\RCM.Backend.pdb
 D:\BE_RCM\RCM.Backend\RCM.Backend\obj\Debug\net6.0\RCM.Backend.genruntimeconfig.cache
 D:\BE_RCM\RCM.Backend\RCM.Backend\obj\Debug\net6.0\ref\RCM.Backend.dll
+D:\HN23_CPL_FE_05\React\RCM.Backend\RCM.Backend\bin\Debug\net6.0\ClosedXML.dll
+D:\HN23_CPL_FE_05\React\RCM.Backend\RCM.Backend\bin\Debug\net6.0\ClosedXML.Parser.dll
+D:\HN23_CPL_FE_05\React\RCM.Backend\RCM.Backend\bin\Debug\net6.0\CsvHelper.dll
+D:\HN23_CPL_FE_05\React\RCM.Backend\RCM.Backend\bin\Debug\net6.0\DocumentFormat.OpenXml.dll
+D:\HN23_CPL_FE_05\React\RCM.Backend\RCM.Backend\bin\Debug\net6.0\DocumentFormat.OpenXml.Framework.dll
+D:\HN23_CPL_FE_05\React\RCM.Backend\RCM.Backend\bin\Debug\net6.0\EPPlus.dll
+D:\HN23_CPL_FE_05\React\RCM.Backend\RCM.Backend\bin\Debug\net6.0\ExcelNumberFormat.dll
+D:\HN23_CPL_FE_05\React\RCM.Backend\RCM.Backend\bin\Debug\net6.0\Microsoft.IO.RecyclableMemoryStream.dll
+D:\HN23_CPL_FE_05\React\RCM.Backend\RCM.Backend\bin\Debug\net6.0\RBush.dll
+D:\HN23_CPL_FE_05\React\RCM.Backend\RCM.Backend\bin\Debug\net6.0\SixLabors.Fonts.dll
+D:\HN23_CPL_FE_05\React\RCM.Backend\RCM.Backend\bin\Debug\net6.0\System.IO.Packaging.dll
+D:\HN23_CPL_FE_05\React\RCM.Backend\RCM.Backend\bin\Debug\net6.0\System.Xml.XPath.XmlDocument.dll
+D:\HN23_CPL_FE_05\React\RCM.Backend\RCM.Backend\bin\Debug\net6.0\DataLayerObject.dll
+D:\HN23_CPL_FE_05\React\RCM.Backend\RCM.Backend\bin\Debug\net6.0\DataLayerObject.pdb
