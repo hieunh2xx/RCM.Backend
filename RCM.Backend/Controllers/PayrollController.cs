@@ -21,9 +21,9 @@ public class PayrollController : ControllerBase
 
     [HttpPost("getAllPayroll")]
     public async Task<IActionResult> CalculateAndSavePayrollForAllEmployees(
-        [FromQuery] string? search,
-        [FromQuery] int month,
-        [FromQuery] int year)
+     [FromQuery] string? search,
+     [FromQuery] int month,
+     [FromQuery] int year)
     {
         var startDate = new DateTime(year, month, 1);
         var endDate = startDate.AddMonths(1).AddDays(-1);
@@ -42,7 +42,7 @@ public class PayrollController : ControllerBase
         var employees = await employeesQuery.ToListAsync();
         var employeeIds = employees.Select(e => e.Id).ToList();
 
-        // Tính số ngày chấm công và giờ tăng ca
+        // Tính số ngày chấm công từ AttendanceCheckIns và AttendanceCheckOuts
         var attendanceData = await _context.AttendanceCheckIns
             .Where(ci => employeeIds.Contains(ci.EmployeeId) &&
                         ci.AttendanceDate.Month == month &&
@@ -54,9 +54,7 @@ public class PayrollController : ControllerBase
                 {
                     ci.EmployeeId,
                     ci.AttendanceDate,
-                    ci.Shift,
-                    ci.CheckInTime,
-                    co.CheckOutTime
+                    ci.Shift
                 })
             .ToListAsync();
 
@@ -76,19 +74,22 @@ public class PayrollController : ControllerBase
                 g => g.Count()
             );
 
-        var overtimeDict = attendanceData
-            .GroupBy(x => x.EmployeeId)
+        // Tính giờ tăng ca từ OvertimeRecord
+        var overtimeRecords = await _context.OvertimeRecords
+            .Where(o => employeeIds.Contains(o.EmployeeId) &&
+                        o.Date.Month == month &&
+                        o.Date.Year == year &&
+                        o.IsApproved == true)
+            .ToListAsync(); // Chuyển sang danh sách để xử lý phía client
+
+        var overtimeData = overtimeRecords
+            .GroupBy(o => o.EmployeeId)
             .ToDictionary(
                 g => g.Key,
-                g => g.Sum(x =>
-                {
-                    var workTime = x.CheckOutTime - x.CheckInTime;
-                    var standardShiftMinutes = 420;
-                    return Math.Max(0, (int)workTime.TotalMinutes - standardShiftMinutes);
-                }) / 60.0m
+                g => g.Sum(o => o.TotalHours)
             );
 
-        // Sửa lỗi trùng key bằng cách lấy bản ghi mới nhất cho mỗi EmployeeId
+        // Lấy danh sách lương hiện có
         var existingSalariesList = await _context.Salaries
             .Where(s => employeeIds.Contains(s.EmployeeId) &&
                         s.StartDate.HasValue &&
@@ -107,7 +108,7 @@ public class PayrollController : ControllerBase
         {
             int totalWorkDays = workDaysDict.ContainsKey(employee.Id) ? workDaysDict[employee.Id] : 0;
             int totalShifts = shiftDict.ContainsKey(employee.Id) ? shiftDict[employee.Id] : 0;
-            decimal totalOvertimeHours = overtimeDict.ContainsKey(employee.Id) ? overtimeDict[employee.Id] : 0;
+            decimal totalOvertimeHours = overtimeData.ContainsKey(employee.Id) ? overtimeData[employee.Id] : 0;
             decimal bonusSalary = CalculateBonus(totalShifts);
             decimal overtimePay = totalOvertimeHours * overtimeRate;
             Salary salaryRecord;
@@ -205,7 +206,7 @@ public class PayrollController : ControllerBase
             .Join(_context.AttendanceCheckOuts,
                 ci => new { ci.EmployeeId, ci.AttendanceDate, ci.Shift },
                 co => new { co.EmployeeId, co.AttendanceDate, co.Shift },
-                (ci, co) => new { ci.AttendanceDate, ci.CheckInTime, co.CheckOutTime })
+                (ci, co) => new { ci.AttendanceDate })
             .ToListAsync();
 
         int totalWorkDays = attendanceData
@@ -214,13 +215,13 @@ public class PayrollController : ControllerBase
 
         int totalShifts = attendanceData.Count;
 
-        decimal totalOvertimeHours = attendanceData
-            .Sum(x =>
-            {
-                var workTime = x.CheckOutTime - x.CheckInTime;
-                var standardShiftMinutes = 420; // 7 tiếng
-                return Math.Max(0, (decimal)workTime.TotalMinutes - standardShiftMinutes) / 60;
-            });
+        // Lấy giờ tăng ca từ OvertimeRecord
+        decimal totalOvertimeHours = await _context.OvertimeRecords
+            .Where(o => o.EmployeeId == employeeId &&
+                        o.Date.Month == month &&
+                        o.Date.Year == year &&
+                        o.IsApproved == true) // Chỉ lấy các bản ghi đã duyệt
+            .SumAsync(o => o.TotalHours);
 
         decimal bonusSalary = CalculateBonus(totalShifts);
         decimal overtimeRate = 50000; // 50,000 VNĐ/giờ tăng ca
@@ -323,15 +324,12 @@ public class PayrollController : ControllerBase
                         co => new { co.EmployeeId, co.AttendanceDate, co.Shift },
                         (ci, co) => ci)
                     .Count(),
-                TotalOvertimeHours = _context.AttendanceCheckIns
-                    .Where(ci => ci.EmployeeId == s.EmployeeId &&
-                                ci.AttendanceDate.Month == month &&
-                                ci.AttendanceDate.Year == year)
-                    .Join(_context.AttendanceCheckOuts,
-                        ci => new { ci.EmployeeId, ci.AttendanceDate, ci.Shift },
-                        co => new { co.EmployeeId, co.AttendanceDate, co.Shift },
-                        (ci, co) => new { ci.CheckInTime, co.CheckOutTime })
-                    .Sum(x => Math.Max(0, (decimal)(x.CheckOutTime - x.CheckInTime).TotalMinutes - 420) / 60),
+                TotalOvertimeHours = _context.OvertimeRecords
+                    .Where(o => o.EmployeeId == s.EmployeeId &&
+                                o.Date.Month == month &&
+                                o.Date.Year == year &&
+                                o.IsApproved == true) // Chỉ lấy các bản ghi đã duyệt
+                    .Sum(o => o.TotalHours),
                 BonusSalary = s.BonusSalary ?? 0
             })
             .ToListAsync();
@@ -428,15 +426,12 @@ public class PayrollController : ControllerBase
                 (ci, co) => ci)
             .CountAsync();
 
-        decimal totalOvertimeHours = await _context.AttendanceCheckIns
-            .Where(ci => ci.EmployeeId == request.EmployeeId &&
-                        ci.AttendanceDate.Month == month &&
-                        ci.AttendanceDate.Year == year)
-            .Join(_context.AttendanceCheckOuts,
-                ci => new { ci.EmployeeId, ci.AttendanceDate, ci.Shift },
-                co => new { co.EmployeeId, co.AttendanceDate, co.Shift },
-                (ci, co) => new { ci.CheckInTime, co.CheckOutTime })
-            .SumAsync(x => Math.Max(0, (decimal)(x.CheckOutTime - x.CheckInTime).TotalMinutes - 420) / 60);
+        decimal totalOvertimeHours = await _context.OvertimeRecords
+            .Where(o => o.EmployeeId == request.EmployeeId &&
+                        o.Date.Month == month &&
+                        o.Date.Year == year &&
+                        o.IsApproved == true) // Chỉ lấy các bản ghi đã duyệt
+            .SumAsync(o => o.TotalHours);
 
         decimal bonusSalary = CalculateBonus(totalShifts);
         decimal overtimeRate = 50000; // 50,000 VNĐ/giờ tăng ca
