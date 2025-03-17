@@ -267,6 +267,10 @@ namespace RCM.Backend.Controllers
         [HttpGet("AttendanceReport/Range")]
         public async Task<IActionResult> GetAttendanceReportByRange([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
         {
+            // Chuẩn hóa startDate và endDate để chỉ lấy phần ngày
+            startDate = startDate.Date;
+            endDate = endDate.Date;
+
             if (startDate > endDate)
                 return BadRequest("startDate must be earlier than endDate.");
 
@@ -281,7 +285,7 @@ namespace RCM.Backend.Controllers
 
             var dateRangeReport = new Dictionary<DateTime, object>();
 
-            for (DateTime currentDate = startDate.Date; currentDate <= endDate.Date; currentDate = currentDate.AddDays(1))
+            for (DateTime currentDate = startDate; currentDate <= endDate; currentDate = currentDate.AddDays(1))
             {
                 var attendedRecords = checkIns
                     .Where(a => a.AttendanceDate.Date == currentDate)
@@ -296,7 +300,7 @@ namespace RCM.Backend.Controllers
                         a.CheckInTime,
                         CheckOutTime = checkOuts
                             .FirstOrDefault(co => co.EmployeeId == a.EmployeeId
-                                && co.AttendanceDate == currentDate
+                                && co.AttendanceDate.Date == currentDate
                                 && co.Shift == a.Shift)?.CheckOutTime,
                         Status = "Attended"
                     })
@@ -332,7 +336,6 @@ namespace RCM.Backend.Controllers
 
             return Ok(dateRangeReport);
         }
-
         [HttpGet("GetEmployees")]
         public async Task<IActionResult> GetEmployees()
         {

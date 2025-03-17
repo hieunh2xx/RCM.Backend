@@ -394,17 +394,24 @@ public class PayrollController : ControllerBase
             return NotFound("Không tìm thấy bảng lương của nhân viên trong tháng và năm đã cho.");
         }
 
+        // Kiểm tra xem lương đã được thanh toán chưa
         bool hasReceivedSalary = await _context.SalaryPaymentHistories
             .AnyAsync(p => p.EmployeeId == request.EmployeeId &&
                           p.PaymentDate.HasValue &&
                           p.PaymentDate.Value.Month == month &&
                           p.PaymentDate.Value.Year == year);
 
+        if (hasReceivedSalary && request.FixedSalary.HasValue && request.FixedSalary != salaryRecord.FixedSalary)
+        {
+            return BadRequest("Không thể cập nhật FixedSalary vì lương đã được thanh toán.");
+        }
+
         if (request.Status == "Done" && !hasReceivedSalary)
         {
             return BadRequest("Nhân viên chưa nhận lương, không thể cập nhật trạng thái thành 'Done'.");
         }
 
+        // Tính số ngày làm việc và ca
         int totalWorkDays = await _context.AttendanceCheckIns
             .Where(ci => ci.EmployeeId == request.EmployeeId &&
                         ci.AttendanceDate.Month == month &&
@@ -426,6 +433,7 @@ public class PayrollController : ControllerBase
                 (ci, co) => ci)
             .CountAsync();
 
+        // Tính giờ tăng ca từ OvertimeRecord
         decimal totalOvertimeHours = await _context.OvertimeRecords
             .Where(o => o.EmployeeId == request.EmployeeId &&
                         o.Date.Month == month &&
@@ -437,12 +445,27 @@ public class PayrollController : ControllerBase
         decimal overtimeRate = 50000; // 50,000 VNĐ/giờ tăng ca
         decimal overtimePay = totalOvertimeHours * overtimeRate;
 
-        salaryRecord.FixedSalary = request.FixedSalary ?? 0;
+        // Cập nhật FixedSalary
+        if (request.FixedSalary.HasValue)
+        {
+            if (request.FixedSalary < 0)
+            {
+                return BadRequest("FixedSalary không thể là số âm.");
+            }
+            salaryRecord.FixedSalary = request.FixedSalary.Value;
+        }
+        else if (salaryRecord.FixedSalary == null)
+        {
+            // Nếu không có giá trị trong request và FixedSalary hiện tại là null, lấy từ Employee
+            salaryRecord.FixedSalary = salaryRecord.Employee?.FixedSalary ?? 0;
+        }
+
+        // Cập nhật các trường khác
         salaryRecord.BonusSalary = (int)(bonusSalary + overtimePay);
         salaryRecord.Status = request.Status;
         salaryRecord.FinalSalary = (int)((salaryRecord.FixedSalary ?? 0) * totalWorkDays) +
-                                 (int)bonusSalary +
-                                 (int)overtimePay;
+                                  (int)bonusSalary +
+                                  (int)overtimePay;
 
         await _context.SaveChangesAsync();
 
@@ -460,7 +483,6 @@ public class PayrollController : ControllerBase
             Status = salaryRecord.Status
         });
     }
-
     private decimal CalculateBonus(int totalShifts)
     {
         if (totalShifts > 10)
