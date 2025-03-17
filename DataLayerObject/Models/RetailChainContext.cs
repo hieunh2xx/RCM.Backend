@@ -17,13 +17,15 @@ namespace DataLayerObject.Models
         }
 
         public virtual DbSet<Account> Accounts { get; set; } = null!;
-        public virtual DbSet<AttendanceHi> AttendanceHis { get; set; } = null!;
+        public virtual DbSet<AttendanceCheckIn> AttendanceCheckIns { get; set; } = null!;
+        public virtual DbSet<AttendanceCheckOut> AttendanceCheckOuts { get; set; } = null!;
         public virtual DbSet<Batch> Batches { get; set; } = null!;
         public virtual DbSet<BatchDetail> BatchDetails { get; set; } = null!;
         public virtual DbSet<Cash> Cashes { get; set; } = null!;
         public virtual DbSet<Employee> Employees { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
         public virtual DbSet<OrderDetail> OrderDetails { get; set; } = null!;
+        public virtual DbSet<OvertimeRecord> OvertimeRecords { get; set; } = null!;
         public virtual DbSet<PenaltyPayment> PenaltyPayments { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
         public virtual DbSet<ProductPrice> ProductPrices { get; set; } = null!;
@@ -56,7 +58,7 @@ namespace DataLayerObject.Models
             {
                 entity.ToTable("Account");
 
-                entity.HasIndex(e => e.Username, "UQ__Account__536C85E489920169")
+                entity.HasIndex(e => e.Username, "UQ__Account__536C85E400D5C155")
                     .IsUnique();
 
                 entity.Property(e => e.PasswordHash)
@@ -72,23 +74,39 @@ namespace DataLayerObject.Models
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.Accounts)
                     .HasForeignKey(d => d.EmployeeId)
-                    .HasConstraintName("FK__Account__Employe__7E37BEF6");
+                    .HasConstraintName("FK__Account__Employe__6B24EA82");
             });
 
-            modelBuilder.Entity<AttendanceHi>(entity =>
+            modelBuilder.Entity<AttendanceCheckIn>(entity =>
             {
+                entity.ToTable("AttendanceCheckIn");
+
                 entity.Property(e => e.AttendanceDate).HasColumnType("date");
 
                 entity.Property(e => e.CheckInTime).HasColumnType("datetime");
+
+                entity.Property(e => e.Shift).HasMaxLength(50);
+
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.AttendanceCheckIns)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .HasConstraintName("FK__Attendanc__Emplo__18EBB532");
+            });
+
+            modelBuilder.Entity<AttendanceCheckOut>(entity =>
+            {
+                entity.ToTable("AttendanceCheckOut");
+
+                entity.Property(e => e.AttendanceDate).HasColumnType("date");
 
                 entity.Property(e => e.CheckOutTime).HasColumnType("datetime");
 
                 entity.Property(e => e.Shift).HasMaxLength(50);
 
                 entity.HasOne(d => d.Employee)
-                    .WithMany(p => p.AttendanceHis)
+                    .WithMany(p => p.AttendanceCheckOuts)
                     .HasForeignKey(d => d.EmployeeId)
-                    .HasConstraintName("FK__Attendanc__Emplo__01142BA1");
+                    .HasConstraintName("FK__Attendanc__Emplo__1BC821DD");
             });
 
             modelBuilder.Entity<Batch>(entity =>
@@ -107,7 +125,7 @@ namespace DataLayerObject.Models
                 entity.HasOne(d => d.Warehouse)
                     .WithMany(p => p.Batches)
                     .HasForeignKey(d => d.WarehouseId)
-                    .HasConstraintName("FK__batch__warehouse__5070F446");
+                    .HasConstraintName("FK__batch__warehouse__778AC167");
             });
 
             modelBuilder.Entity<BatchDetail>(entity =>
@@ -129,12 +147,12 @@ namespace DataLayerObject.Models
                 entity.HasOne(d => d.Batch)
                     .WithMany(p => p.BatchDetails)
                     .HasForeignKey(d => d.BatchId)
-                    .HasConstraintName("FK__batch_det__batch__534D60F1");
+                    .HasConstraintName("FK__batch_det__batch__787EE5A0");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.BatchDetails)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__batch_det__produ__5441852A");
+                    .HasConstraintName("FK__batch_det__produ__797309D9");
             });
 
             modelBuilder.Entity<Cash>(entity =>
@@ -153,22 +171,22 @@ namespace DataLayerObject.Models
                     .WithMany(p => p.Cashes)
                     .HasForeignKey(d => d.BranchId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__CASH__BranchId__07C12930");
+                    .HasConstraintName("FK__CASH__BranchId__7A672E12");
 
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.Cashes)
                     .HasForeignKey(d => d.EmployeeId)
-                    .HasConstraintName("FK__CASH__EmployeeId__06CD04F7");
+                    .HasConstraintName("FK__CASH__EmployeeId__73BA3083");
             });
 
             modelBuilder.Entity<Employee>(entity =>
             {
                 entity.ToTable("Employee");
 
-                entity.HasIndex(e => e.IdentityNumber, "UQ__Employee__6354A73F8ECA0308")
+                entity.HasIndex(e => e.IdentityNumber, "UQ__Employee__6354A73F3582D3F8")
                     .IsUnique();
 
-                entity.HasIndex(e => e.PhoneNumber, "UQ__Employee__85FB4E3880D8DC7D")
+                entity.HasIndex(e => e.PhoneNumber, "UQ__Employee__85FB4E3829CB855B")
                     .IsUnique();
 
                 entity.Property(e => e.BirthDate).HasColumnType("date");
@@ -191,12 +209,14 @@ namespace DataLayerObject.Models
                     .HasMaxLength(15)
                     .IsUnicode(false);
 
+                entity.Property(e => e.SeniorityStatus).HasColumnName("seniorityStatus");
+
                 entity.Property(e => e.StartDate).HasColumnType("date");
 
                 entity.HasOne(d => d.Branch)
                     .WithMany(p => p.Employees)
                     .HasForeignKey(d => d.BranchId)
-                    .HasConstraintName("FK__Employee__Branch__3C69FB99");
+                    .HasConstraintName("FK__Employee__Branch__29572725");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -228,12 +248,12 @@ namespace DataLayerObject.Models
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.EmployeeId)
-                    .HasConstraintName("FK__Order__EmployeeI__6FE99F9F");
+                    .HasConstraintName("FK__Order__EmployeeI__5CD6CB2B");
 
                 entity.HasOne(d => d.Shop)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.ShopId)
-                    .HasConstraintName("FK__Order__shop_id__6EF57B66");
+                    .HasConstraintName("FK__Order__shop_id__7E37BEF6");
             });
 
             modelBuilder.Entity<OrderDetail>(entity =>
@@ -261,12 +281,29 @@ namespace DataLayerObject.Models
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.OrderId)
-                    .HasConstraintName("FK__OrderDeta__order__72C60C4A");
+                    .HasConstraintName("FK__OrderDeta__order__7F2BE32F");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__OrderDeta__produ__73BA3083");
+                    .HasConstraintName("FK__OrderDeta__produ__00200768");
+            });
+
+            modelBuilder.Entity<OvertimeRecord>(entity =>
+            {
+                entity.Property(e => e.Date).HasColumnType("date");
+
+                entity.Property(e => e.IsApproved).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Reason).HasMaxLength(255);
+
+                entity.Property(e => e.TotalHours).HasColumnType("decimal(5, 2)");
+
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.OvertimeRecords)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__OvertimeR__Emplo__160F4887");
             });
 
             modelBuilder.Entity<PenaltyPayment>(entity =>
@@ -282,14 +319,14 @@ namespace DataLayerObject.Models
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.PenaltyPayments)
                     .HasForeignKey(d => d.EmployeeId)
-                    .HasConstraintName("FK__PenaltyPa__Emplo__10566F31");
+                    .HasConstraintName("FK__PenaltyPa__Emplo__0E6E26BF");
             });
 
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.ToTable("products");
 
-                entity.HasIndex(e => e.Barcode, "UQ__products__C16E36F89AEE5D7D")
+                entity.HasIndex(e => e.Barcode, "UQ__products__C16E36F8A4BA15AC")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -353,7 +390,7 @@ namespace DataLayerObject.Models
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.ProductPrices)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__product_p__produ__46E78A0C");
+                    .HasConstraintName("FK__product_p__produ__02FC7413");
             });
 
             modelBuilder.Entity<PurchaseOrder>(entity =>
@@ -380,7 +417,7 @@ namespace DataLayerObject.Models
                     .WithMany(p => p.PurchaseOrders)
                     .HasForeignKey(d => d.SupplierId)
                     .OnDelete(DeleteBehavior.SetNull)
-                    .HasConstraintName("FK__purchase___suppl__5812160E");
+                    .HasConstraintName("FK__purchase___suppl__06CD04F7");
             });
 
             modelBuilder.Entity<PurchaseOrderItem>(entity =>
@@ -408,17 +445,17 @@ namespace DataLayerObject.Models
                 entity.HasOne(d => d.Batch)
                     .WithMany(p => p.PurchaseOrderItems)
                     .HasForeignKey(d => d.BatchId)
-                    .HasConstraintName("FK__purchase___batch__5DCAEF64");
+                    .HasConstraintName("FK__purchase___batch__03F0984C");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.PurchaseOrderItems)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__purchase___produ__5CD6CB2B");
+                    .HasConstraintName("FK__purchase___produ__04E4BC85");
 
                 entity.HasOne(d => d.PurchaseOrder)
                     .WithMany(p => p.PurchaseOrderItems)
                     .HasForeignKey(d => d.PurchaseOrderId)
-                    .HasConstraintName("FK__purchase___purch__5BE2A6F2");
+                    .HasConstraintName("FK__purchase___purch__05D8E0BE");
             });
 
             modelBuilder.Entity<Refund>(entity =>
@@ -442,7 +479,7 @@ namespace DataLayerObject.Models
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.Refunds)
                     .HasForeignKey(d => d.OrderId)
-                    .HasConstraintName("FK__Refund__order_id__76969D2E");
+                    .HasConstraintName("FK__Refund__order_id__07C12930");
             });
 
             modelBuilder.Entity<RefundDetail>(entity =>
@@ -472,7 +509,7 @@ namespace DataLayerObject.Models
                 entity.HasOne(d => d.Refund)
                     .WithMany(p => p.RefundDetails)
                     .HasForeignKey(d => d.RefundId)
-                    .HasConstraintName("FK__RefundDet__refun__797309D9");
+                    .HasConstraintName("FK__RefundDet__refun__08B54D69");
             });
 
             modelBuilder.Entity<Salary>(entity =>
@@ -488,7 +525,7 @@ namespace DataLayerObject.Models
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.Salaries)
                     .HasForeignKey(d => d.EmployeeId)
-                    .HasConstraintName("FK__Salary__Employee__03F0984C");
+                    .HasConstraintName("FK__Salary__Employee__70DDC3D8");
             });
 
             modelBuilder.Entity<SalaryPaymentHistory>(entity =>
@@ -504,13 +541,13 @@ namespace DataLayerObject.Models
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.SalaryPaymentHistories)
                     .HasForeignKey(d => d.EmployeeId)
-                    .HasConstraintName("FK__SalaryPay__Emplo__0B91BA14");
+                    .HasConstraintName("FK__SalaryPay__Emplo__787EE5A0");
 
                 entity.HasOne(d => d.Salary)
                     .WithMany(p => p.SalaryPaymentHistories)
                     .HasForeignKey(d => d.SalaryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__SalaryPay__Salar__0C85DE4D");
+                    .HasConstraintName("FK__SalaryPay__Salar__0B91BA14");
             });
 
             modelBuilder.Entity<StockAdjustment>(entity =>
@@ -528,7 +565,7 @@ namespace DataLayerObject.Models
                 entity.HasOne(d => d.Warehouse)
                     .WithMany(p => p.StockAdjustments)
                     .HasForeignKey(d => d.WarehouseId)
-                    .HasConstraintName("FK__stock_adj__wareh__6754599E");
+                    .HasConstraintName("FK__stock_adj__wareh__0E6E26BF");
             });
 
             modelBuilder.Entity<StockAdjustmentDetail>(entity =>
@@ -546,12 +583,12 @@ namespace DataLayerObject.Models
                 entity.HasOne(d => d.Adjustment)
                     .WithMany(p => p.StockAdjustmentDetails)
                     .HasForeignKey(d => d.AdjustmentId)
-                    .HasConstraintName("FK__stock_adj__adjus__6A30C649");
+                    .HasConstraintName("FK__stock_adj__adjus__0C85DE4D");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.StockAdjustmentDetails)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__stock_adj__produ__6B24EA82");
+                    .HasConstraintName("FK__stock_adj__produ__0D7A0286");
             });
 
             modelBuilder.Entity<StockAuditDetail>(entity =>
@@ -569,12 +606,12 @@ namespace DataLayerObject.Models
                 entity.HasOne(d => d.Audit)
                     .WithMany(p => p.StockAuditDetails)
                     .HasForeignKey(d => d.AuditId)
-                    .HasConstraintName("FK__stock_aud__audit__6383C8BA");
+                    .HasConstraintName("FK__stock_aud__audit__0F624AF8");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.StockAuditDetails)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__stock_aud__produ__6477ECF3");
+                    .HasConstraintName("FK__stock_aud__produ__10566F31");
             });
 
             modelBuilder.Entity<StockAuditRecord>(entity =>
@@ -592,7 +629,7 @@ namespace DataLayerObject.Models
                 entity.HasOne(d => d.Warehouse)
                     .WithMany(p => p.StockAuditRecords)
                     .HasForeignKey(d => d.WarehouseId)
-                    .HasConstraintName("FK__stock_aud__wareh__60A75C0F");
+                    .HasConstraintName("FK__stock_aud__wareh__114A936A");
             });
 
             modelBuilder.Entity<StockLevel>(entity =>
@@ -614,12 +651,12 @@ namespace DataLayerObject.Models
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.StockLevels)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__stock_lev__produ__4BAC3F29");
+                    .HasConstraintName("FK__stock_lev__produ__123EB7A3");
 
                 entity.HasOne(d => d.Warehouse)
                     .WithMany(p => p.StockLevels)
                     .HasForeignKey(d => d.WarehouseId)
-                    .HasConstraintName("FK__stock_lev__wareh__4CA06362");
+                    .HasConstraintName("FK__stock_lev__wareh__1332DBDC");
             });
 
             modelBuilder.Entity<Supplier>(entity =>

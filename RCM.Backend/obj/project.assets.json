@@ -7243,24 +7243,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\thien\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\HN23_CPL_FE_05\\React\\RCM.Backend\\RCM.Backend\\RCM.Backend.csproj",
+      "projectUniqueName": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\RCM.Backend.csproj",
       "projectName": "RCM.Backend",
-      "projectPath": "D:\\HN23_CPL_FE_05\\React\\RCM.Backend\\RCM.Backend\\RCM.Backend.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "D:\\HN23_CPL_FE_05\\React\\RCM.Backend\\RCM.Backend\\obj\\",
+      "projectPath": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\RCM.Backend.csproj",
+      "packagesPath": "C:\\Users\\thien\\.nuget\\packages\\",
+      "outputPath": "D:\\BE_RCM\\RCM.Backend\\RCM.Backend\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\thien\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7275,8 +7270,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\HN23_CPL_FE_05\\React\\RCM.Backend\\DataLayerObject\\DataLayerObject.csproj": {
-              "projectPath": "D:\\HN23_CPL_FE_05\\React\\RCM.Backend\\DataLayerObject\\DataLayerObject.csproj"
+            "D:\\BE_RCM\\RCM.Backend\\DataLayerObject\\DataLayerObject.csproj": {
+              "projectPath": "D:\\BE_RCM\\RCM.Backend\\DataLayerObject\\DataLayerObject.csproj"
             }
           }
         }
@@ -7290,8 +7285,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.200"
+      }
     },
     "frameworks": {
       "net6.0": {
@@ -7363,7 +7357,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303\\RuntimeIdentifierGraph.json"
       }
     }
   }

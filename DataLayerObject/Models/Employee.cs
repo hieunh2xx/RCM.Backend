@@ -8,9 +8,11 @@ namespace DataLayerObject.Models
         public Employee()
         {
             Accounts = new HashSet<Account>();
-            AttendanceHis = new HashSet<AttendanceHi>();
+            AttendanceCheckIns = new HashSet<AttendanceCheckIn>();
+            AttendanceCheckOuts = new HashSet<AttendanceCheckOut>();
             Cashes = new HashSet<Cash>();
             Orders = new HashSet<Order>();
+            OvertimeRecords = new HashSet<OvertimeRecord>();
             PenaltyPayments = new HashSet<PenaltyPayment>();
             Salaries = new HashSet<Salary>();
             SalaryPaymentHistories = new HashSet<SalaryPaymentHistory>();
@@ -30,12 +32,15 @@ namespace DataLayerObject.Models
         public bool? ActiveStatus { get; set; }
         public DateTime StartDate { get; set; }
         public int? BranchId { get; set; }
+        public bool? SeniorityStatus { get; set; }
 
         public virtual Warehouse? Branch { get; set; }
         public virtual ICollection<Account> Accounts { get; set; }
-        public virtual ICollection<AttendanceHi> AttendanceHis { get; set; }
+        public virtual ICollection<AttendanceCheckIn> AttendanceCheckIns { get; set; }
+        public virtual ICollection<AttendanceCheckOut> AttendanceCheckOuts { get; set; }
         public virtual ICollection<Cash> Cashes { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<OvertimeRecord> OvertimeRecords { get; set; }
         public virtual ICollection<PenaltyPayment> PenaltyPayments { get; set; }
         public virtual ICollection<Salary> Salaries { get; set; }
         public virtual ICollection<SalaryPaymentHistory> SalaryPaymentHistories { get; set; }
